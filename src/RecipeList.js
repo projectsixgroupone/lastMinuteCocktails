@@ -6,8 +6,10 @@ import firebase from './firebase';
 
 export default class RecipeList extends Component {
     ingredientList = (recipe) => {
+        // Arrays to store the ingredients and coressponding measurements of each drink in results
         let ingredientArray = [];
         let measureArray = [];
+        // Loops through the 15 ingredients and measurements listed in the object and pushes the populated ones into the array. The measurements Array contains the corresponding amount even if it's blank
         for (let i=1;i<16;i++) {
             let strIngredient = "strIngredient" + i;
             let strMeasure = "strMeasure" + i;
@@ -16,6 +18,7 @@ export default class RecipeList extends Component {
             measureArray.push(recipe[strMeasure]);
             }
         }
+        // stores both ingredient and measurement arrays into one object to be returned and used in the render method
         let ingredientAndMeasurement = {
             ingredient: ingredientArray,
             measure: measureArray
@@ -23,6 +26,7 @@ export default class RecipeList extends Component {
         return ingredientAndMeasurement;
     }
 
+    // storeDrink is a method that takes the id of a resulting drink and stores it to the firebase database. When stored, the ids are all stored under 1 parent, and each contain a child specifying if it's favourited
     storeDrink =(drinkId) => {
         const dbref = firebase.database().ref('drinks');
         dbref.update({
@@ -33,6 +37,7 @@ export default class RecipeList extends Component {
         console.log(drinkId);
     }
 
+    // When a value is updated, retrieves the information from firebase
     componentDidMount() {
         const dbref = firebase.database().ref();
         dbref.on('value', (response) => {
@@ -40,6 +45,8 @@ export default class RecipeList extends Component {
 
         })
     }
+
+    // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
 
     render() { 
         return (

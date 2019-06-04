@@ -17,7 +17,7 @@ class App extends Component {
   }
 
 
-
+  // handles the input the user inputs. If the input is valid, it calls the API. If not, it sets an error in state.
   handleInput = (drink) =>{
     if(drink) {this.getDrinks(drink)}else{this.setState({
       error:true,
@@ -27,6 +27,7 @@ class App extends Component {
 
   }
 
+  // API call takes user input as a query 
   getDrinks = (drink) =>{
     const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
     console.log(drink)
@@ -38,6 +39,7 @@ class App extends Component {
     }).then(results => {
       results = results.data.drinks;
 
+      // if there is no result or API calls nothing, show an error. Otherwise save results to state
       if(results){
         this.setState({
           drinkRecipes: results,

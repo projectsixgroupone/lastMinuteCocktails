@@ -4,6 +4,9 @@ import firebase from './firebase.js';
 
 
 export default class Recipe extends Component {
+
+    // Takes each result from the search bar and displays the name, thumbnail and instructions relating to the drink
+    // Favourite button stores the drink based on the drink's property: id
     render() {
         return (
             <div>

@@ -3,10 +3,14 @@ import './App.css';
 import firebase from './firebase.js';
 import Form from './Form.js'
 import axios from 'axios'
+import RecipeList from './RecipeList.js';
 
 class App extends Component {
   constructor() {
-    super()
+    super();
+    this.state = {
+      drinkRecipes: []
+    }
 
   }
   handleInput = (drink) =>{
@@ -21,8 +25,11 @@ class App extends Component {
       params: {
         s: encodeURI(drink)
       }
-    }).then(result => {
-      console.log(result)
+    }).then(results => {
+      results = results.data.drinks;
+      this.setState({
+        drinkRecipes: results
+      })
     })
   }
 
@@ -33,6 +40,7 @@ class App extends Component {
       <div className="App">
         <h1>Last Minute Cocktail Generator</h1>
         <Form handlerFromParent={this.handleInput}/>
+        <RecipeList drinkRecipes={this.state.drinkRecipes}/>
       </div>
     );
   }

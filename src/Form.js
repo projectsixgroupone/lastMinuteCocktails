@@ -18,7 +18,7 @@ class Form extends Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        this.props.handlerFromParent(event)
+        this.props.handlerFromParent(this.state.value)
     }
         
     render() {

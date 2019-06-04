@@ -5,6 +5,9 @@ export default class Recipe extends Component {
         return (
             <div>
                 <p>{this.props.name}</p>
+                <img src={this.props.thumbnail} alt={this.props.name} />
+                <p>{this.props.instructions}</p>
+
             </div>
         )
     }

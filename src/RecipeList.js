@@ -22,27 +22,23 @@ export default class RecipeList extends Component {
         return ingredientAndMeasurement;
     }
 
-    returnRecipes = () => {
-        this.props.drinkRecipes.map((recipe) => {
-            let ingredientArray = this.ingredientList(recipe);
-            return (
-                {/* <Recipe
-                    name={recipe.strDrink}
-                    thumbNail={recipe.strDrinkThumb}
-                    ingredients={ingredientArray}
-                    instructions={recipe.strInstructions}
-                /> */}
-                <p>recipe.strDrink</p>
-            )
-            console.log(ingredientArray);
-        })
-    }
-
-
     render() { 
         return (
             <div className="recipesContainer">
-                {this.returnRecipes()}
+                {this.props.drinkRecipes.map((recipe) => {
+                        let ingredientArray = this.ingredientList(recipe);
+                        return (
+                            <Recipe
+                                key={recipe.idDrink}
+                                name={recipe.strDrink}
+                                thumbnail={recipe.strDrinkThumb}
+                                ingredients={ingredientArray}
+                                instructions={recipe.strInstructions}
+                            />
+                        )
+                        console.log(ingredientArray);
+                    })
+                }
             </div>
         )
     }

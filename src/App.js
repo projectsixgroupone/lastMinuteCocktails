@@ -9,12 +9,21 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      drinkRecipes: []
+      drinkRecipes: [],
+      error: false
     }
 
   }
+
+
+
   handleInput = (drink) =>{
-    this.getDrinks(drink);
+    if(drink) {this.getDrinks(drink)}else{this.setState({
+      error:true,
+      drinkRecipes: []
+      
+    })}
+
   }
 
   getDrinks = (drink) =>{
@@ -23,13 +32,24 @@ class App extends Component {
     axios.get(url, {
       dataResponse: 'json',
       params: {
-        s: encodeURI(drink)
+      s: drink
       }
     }).then(results => {
       results = results.data.drinks;
-      this.setState({
-        drinkRecipes: results
-      })
+
+      if(results){
+        this.setState({
+          drinkRecipes: results,
+          error:false
+        })} else{
+          this.setState({
+            error: true,
+            drinkRecipes: []
+          })
+        
+
+      }
+     
     })
   }
 
@@ -39,7 +59,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Last Minute Cocktail Generator</h1>
-        <Form handlerFromParent={this.handleInput}/>
+        <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         <RecipeList drinkRecipes={this.state.drinkRecipes}/>
       </div>
     );

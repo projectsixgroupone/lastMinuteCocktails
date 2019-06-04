@@ -10,7 +10,8 @@ class App extends Component {
     super();
     this.state = {
       drinkRecipes: [],
-      error: false
+      error: false,
+      savedList: {}
     }
 
   }
@@ -46,10 +47,7 @@ class App extends Component {
             error: true,
             drinkRecipes: []
           })
-        
-
       }
-     
     })
   }
 

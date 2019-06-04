@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import firebase from './firebase.js';
+
+
 
 export default class Recipe extends Component {
     render() {
@@ -7,6 +10,7 @@ export default class Recipe extends Component {
                 <p>{this.props.name}</p>
                 <img src={this.props.thumbnail} alt={this.props.name} />
                 <p>{this.props.instructions}</p>
+                <button onClick={() => this.props.storeDrink(this.props.id)}>Favourite This Drink</button>
 
             </div>
         )

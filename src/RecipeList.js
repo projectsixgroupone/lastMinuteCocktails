@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Recipe from './Recipe.js'
+import Recipe from './Recipe.js';
+import firebase from './firebase';
 
 
 
@@ -22,6 +23,24 @@ export default class RecipeList extends Component {
         return ingredientAndMeasurement;
     }
 
+    storeDrink =(drinkId) => {
+        const dbref = firebase.database().ref('drinks');
+        dbref.update({
+            [drinkId]: {
+                favourite: true
+            }
+        })
+        console.log(drinkId);
+    }
+
+    componentDidMount() {
+        const dbref = firebase.database().ref();
+        dbref.on('value', (response) => {
+            console.log(response.val());
+
+        })
+    }
+
     render() { 
         return (
             <div className="recipesContainer">
@@ -35,6 +54,8 @@ export default class RecipeList extends Component {
                                 thumbnail={recipe.strDrinkThumb}
                                 ingredients={ingredientArray}
                                 instructions={recipe.strInstructions}
+                                storeDrink={this.storeDrink}
+                                id={recipe.idDrink}
                             />
                         )
                         console.log(ingredientArray);

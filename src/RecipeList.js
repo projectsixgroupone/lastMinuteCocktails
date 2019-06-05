@@ -28,14 +28,16 @@ export default class RecipeList extends Component {
 
     // storeDrink is a method that takes the id of a resulting drink and stores it to the firebase database. When stored, the ids are all stored under 1 parent, and each contain a child specifying if it's favourited
     storeDrink =(drinkId) => {
-        const dbref = firebase.database().ref('drinks');
+        const dbref = firebase.database().ref('drinks/'+ drinkId);
         dbref.update({
-            [drinkId]: {
-                favourite: true
-            }
+            favourite: true
         })
-        console.log(drinkId);
     }
+    addNote = (drinkId, note) => {
+        const dbref = firebase.database().ref('drinks/'+ drinkId + '/notes');
+        dbref.push({note})
+    }
+
 
     // When a value is updated, retrieves the information from firebase
     componentDidMount() {
@@ -62,10 +64,10 @@ export default class RecipeList extends Component {
                                 ingredients={ingredientArray}
                                 instructions={recipe.strInstructions}
                                 storeDrink={this.storeDrink}
+                                addNote={this.addNote}
                                 id={recipe.idDrink}
                             />
                         )
-                        console.log(ingredientArray);
                     })
                 }
             </div>

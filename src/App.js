@@ -30,7 +30,7 @@ class App extends Component {
   // API call takes user input as a query 
   getDrinks = (drink) =>{
     const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php'
-    console.log(drink)
+    // console.log(drink)
     axios.get(url, {
       dataResponse: 'json',
       params: {

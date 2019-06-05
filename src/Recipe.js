@@ -39,9 +39,27 @@ export default class Recipe extends Component {
     }
 
     componentDidMount() {
+
+        // const dbref = firebase.database().ref();
       const dbref = firebase.database().ref('drinks/' + this.props.id);
+
       dbref.on('value', (response) => {
-        console.log(response.val() );
+        // console.log(response.val() );
+        if (response.val() === null) {
+            dbref.update({
+                favourite: false
+            })
+        } else {
+            // this.setState = {
+            //     totalRating: response.val()
+            // }
+            // console.log(response.val().rating)
+            if (response.val().rating) {
+                this.setState ({
+                    totalRating: response.val().rating
+                })
+            }
+        }
       })
     }
     // Takes each result from the search bar and displays the name, thumbnail and instructions relating to the drink

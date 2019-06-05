@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import firebase from './firebase.js';
 import Form from './Form.js'
 import axios from 'axios'

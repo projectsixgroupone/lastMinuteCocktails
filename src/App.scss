@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -44,13 +45,14 @@
   float: right;
 }
 
-.rating > label:before {
+.rating > label::before {
   margin: 5px;
   font-size: 2em;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
-  content: "\f005";
+  // content: "\f005";
+  content: "x";
 }
 
 .rating > input {

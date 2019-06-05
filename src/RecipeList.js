@@ -38,12 +38,17 @@ export default class RecipeList extends Component {
         dbref.push({note})
     }
 
+    addRating = (drinkId, rating) => {
+        const dbref = firebase.database().ref('drinks/' + drinkId );
+        dbref.update({ rating })
+    }
+
 
     // When a value is updated, retrieves the information from firebase
     componentDidMount() {
         const dbref = firebase.database().ref();
         dbref.on('value', (response) => {
-            console.log(response.val());
+            // console.log(response.val());
 
         })
     }
@@ -66,6 +71,7 @@ export default class RecipeList extends Component {
                                 storeDrink={this.storeDrink}
                                 addNote={this.addNote}
                                 id={recipe.idDrink}
+                                addRating = {this.addRating}
                             />
                         )
                     })

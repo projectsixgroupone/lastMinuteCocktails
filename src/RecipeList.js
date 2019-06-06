@@ -72,7 +72,9 @@ export default class RecipeList extends Component {
                                 addNote={this.addNote}
                                 id={recipe.idDrink}
                                 addRating = {this.addRating}
+                                
                             />
+                            
                         )
                     })
                 }

@@ -10,7 +10,8 @@ export default class Recipe extends Component {
             note: '',
             rating: null, 
             totalRating: [],
-            averageRating: null
+            averageRating: null,
+            allNotes: []
         }
     }
 
@@ -52,10 +53,18 @@ export default class Recipe extends Component {
                 favourite: false
             })
         } else {
-            // this.setState = {
-            //     totalRating: response.val()
-            // }
-            // console.log(response.val().rating)
+            if (response.val().notes){
+                const notes = response.val().notes;
+                const newNotes = [];
+                for (let key in notes){
+                    newNotes.push(notes[key].note)
+                }
+                console.log(notes);
+                console.log(newNotes);
+                this.setState ({
+
+                })
+            }
             if (response.val().rating) {
                 const ratings = response.val().rating                
                 let averageRating = ratings.reduce((total, rating) => total + rating) / ratings.length;
@@ -63,7 +72,6 @@ export default class Recipe extends Component {
                 this.setState ({
                     totalRating: response.val().rating,
                     averageRating: averageRating
-
                 })
             }
         }
@@ -150,7 +158,9 @@ export default class Recipe extends Component {
                 />
                 <span>{this.state.averageRating}</span>
               </div>
-            
+            <div className="notes">
+                
+            </div>
           </div>
         );
     }

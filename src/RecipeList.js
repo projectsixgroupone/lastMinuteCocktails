@@ -8,22 +8,19 @@ export default class RecipeList extends Component {
   ingredientList = (recipe) => {
     // Arrays to store the ingredients and coressponding measurements of each drink in results
     let ingredientArray = [];
-    let measureArray = [];
+  
     // Loops through the 15 ingredients and measurements listed in the object and pushes the populated ones into the array. The measurements Array contains the corresponding amount even if it's blank
     for (let i = 1; i < 16; i++) {
       let strIngredient = "strIngredient" + i;
       let strMeasure = "strMeasure" + i;
       if (recipe[strIngredient] !== "") {
-        ingredientArray.push(recipe[strIngredient]);
-        measureArray.push(recipe[strMeasure]);
+        ingredientArray.push({ ingredient: recipe[strIngredient], measurement: recipe[strMeasure]});
+        
       }
     }
     // stores both ingredient and measurement arrays into one object to be returned and used in the render method
-    let ingredientAndMeasurement = {
-      ingredient: ingredientArray,
-      measure: measureArray
-    }
-    return ingredientAndMeasurement;
+    
+    return ingredientArray;
   }
 
   // storeDrink is a method that takes the id of a resulting drink and stores it to the firebase database. When stored, the ids are all stored under 1 parent, and each contain a child specifying if it's favourited

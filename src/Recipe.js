@@ -9,7 +9,8 @@ export default class Recipe extends Component {
         this.state ={
             note: '',
             rating: null, 
-            totalRating: []
+            totalRating: [],
+            averageRating: null
         }
     }
 
@@ -38,6 +39,7 @@ export default class Recipe extends Component {
       console.log(ratings)
     }
 
+
     componentDidMount() {
 
         // const dbref = firebase.database().ref();
@@ -55,8 +57,13 @@ export default class Recipe extends Component {
             // }
             // console.log(response.val().rating)
             if (response.val().rating) {
+                const ratings = response.val().rating                
+                let averageRating = ratings.reduce((total, rating) => total + rating) / ratings.length;
+                averageRating = Math.round(averageRating)
                 this.setState ({
-                    totalRating: response.val().rating
+                    totalRating: response.val().rating,
+                    averageRating: averageRating
+
                 })
             }
         }
@@ -141,6 +148,7 @@ export default class Recipe extends Component {
                   title="Bad"
                   aria-hidden="true"
                 />
+                <span>{this.state.averageRating}</span>
               </div>
             
           </div>

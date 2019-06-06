@@ -46,13 +46,12 @@
 }
 
 .rating > label::before {
+  content: "\f005";
   margin: 5px;
   font-size: 2em;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
-  // content: "\f005";
-  content: "x";
 }
 
 .rating > input {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
+import { all } from 'q';
 
 
 
@@ -62,7 +63,7 @@ export default class Recipe extends Component {
           console.log(notes);
           console.log(newNotes);
           this.setState({
-
+            allNotes: newNotes,
           })
         }
         if (response.val().rating) {
@@ -71,7 +72,8 @@ export default class Recipe extends Component {
           averageRating = Math.round(averageRating)
           this.setState({
             totalRating: response.val().rating,
-            averageRating: averageRating
+            averageRating: averageRating,
+            rating: averageRating
           })
         }
       }
@@ -94,68 +96,77 @@ export default class Recipe extends Component {
         <div className="rating">
           <input onClick={this.onRating}
             type="radio"
-            id="star5"
-            name="rating"
+            id={'starFive' + this.props.id}
+            name={'rating' + this.props.id}
+            checked={this.state.rating === 5}
             value="5"
           />
           <label
             className="star"
-            htmlFor="star5"
+            htmlFor={'starFive' + this.props.id}
             title="Awesome"
             aria-hidden="true"
           />
           <input onClick={this.onRating}
             type="radio"
-            id="star4"
-            name="rating"
+            id={'starFour' + this.props.id}
+            name={'rating' + this.props.id}
+            checked={this.state.rating === 4}
             value="4"
           />
           <label
             className="star"
-            htmlFor="star4"
+            htmlFor={'starFour' + this.props.id}
             title="Great"
             aria-hidden="true"
           />
           <input onClick={this.onRating}
             type="radio"
-            id="star3"
-            name="rating"
+            id={'starThree' + this.props.id}
+            name={'rating' + this.props.id}
+            checked={this.state.rating === 3}
             value="3"
           />
           <label
             className="star"
-            htmlFor="star3"
+            htmlFor={'starThree' + this.props.id}
             title="Very good"
             aria-hidden="true"
           />
           <input onClick={this.onRating}
             type="radio"
-            id="star2"
-            name="rating"
+            id={'starTwo' + this.props.id}
+            name={'rating' + this.props.id}
+            checked={this.state.rating === 2}
             value="2"
           />
           <label
             className="star"
-            htmlFor="star2"
+            htmlFor={'starTwo' + this.props.id}
             title="Good"
             aria-hidden="true"
           />
           <input onClick={this.onRating}
             type="radio"
-            id="star1"
-            name="rating"
+            id={'starOne' + this.props.id}
+            name={'rating' + this.props.id}
+            checked={this.state.rating === 1}
             value="1"
           />
           <label
             className="star"
-            htmlFor="star1"
+            htmlFor={'starOne' + this.props.id}
             title="Bad"
             aria-hidden="true"
           />
           <span>{this.state.averageRating}</span>
         </div>
         <div className="notes">
-
+          {this.state.allNotes.map(note => {
+            return(
+              <p>{note}</p>
+            )
+          })}
         </div>
       </div>
     );

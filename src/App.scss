@@ -1,75 +1,42 @@
 
+@import 'partials/setup.scss';
+@import 'partials/ratings.scss';
+@import 'partials/mainSection';
+
+
+
+// fonts and colors for entire document
+
+$mainFont: 'Playfair Display', serif;
+$bodyFont: 'Montserrat', serif;
+
+$mainColor: #5705C5;
+$accentColor: #5FD2B9;
+$fontColor: #E6E0E0;
+
+//main styles
+
+
+
+.wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+//font styles 
+
+h1 {
+  font-family: $mainFont;
+  font-size: 50px;
+}
+
+p {
+  font-family: $bodyFont;
 }
 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.rating {
-  margin-top: 40px;
-  border: none;
-  float: left;
-}
-
-.rating > label {
-  color: #90A0A3;
-  float: right;
-}
-
-.rating > label::before {
-  content: "\f005";
-  margin: 5px;
-  font-size: 2em;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  display: inline-block;
-}
-
-.rating > input {
-  display: none;
-}
-
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #F79426;
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-  color: #FECE31;
-}
-
-// SCSS IMPORTS
-@import './partials/mainSection';

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import firebase from './firebase.js';
 import { all } from 'q';
 
@@ -205,7 +205,7 @@ export default class Recipe extends Component {
         )
       } else {
         return(
-          <div>
+          <div className="resultDisplay">
         <h2>{this.props.name}</h2>
         <img src={this.props.thumbnail} alt={this.props.name} />
         <p>{this.props.instructions}</p>
@@ -288,9 +288,9 @@ export default class Recipe extends Component {
     }
 
     return (
-      <div>
+      <Fragment>
         {expandContent()}
-      </div>
+      </Fragment>
     );
   }
 }

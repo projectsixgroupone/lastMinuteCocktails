@@ -57,8 +57,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Last Minute Cocktail Generator</h1>
+      <div className="header">
+        <h1>Cocktail Generator</h1>
+        <h2>Look up any cocktail recipe in our database</h2>
         <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         <RecipeList drinkRecipes={this.state.drinkRecipes}/>
       </div>

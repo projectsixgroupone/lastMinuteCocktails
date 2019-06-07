@@ -1,3 +1,9 @@
+
+$mainColor: #5705C5;
+$backgroundColor: #E6E0E0;
+$accentColor: #5FD2B9;
+
+
 * {
     padding: 0;
     margin: 0;
@@ -13,14 +19,88 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
 }
 
 .resultDisplay {
     width: calc(25% - 2.5%);
     display: flex;
     flex-direction: column;
+   background-color: white;
+   margin-top: 5%;
+    position: relative;
+
+}
+
+.drinkInfo {
+    margin: 7%;
+}
+
+.drinkInfo p {
+    margin: 10px 0;
+    line-height: 1.4;
+    font-size: 19px;
 }
 
 .resultDisplay img {
     max-width: 100%;
+}
+
+.results {
+    background-color: $backgroundColor;
+}
+
+.rating {
+    padding-right: 5%;
+}
+
+.favouriteButton {
+    background-color: $accentColor;
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.favouriteButton i {
+    font-size: 28px;
+}
+
+.readMore {
+    border: none;
+    color: $mainColor;
+    font-size: 25px;
+    width: 100%;
+    text-align: left;
+}
+
+// EXPANDED RESULTS
+
+.expandedResultDisplay {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   background-color: white;
+   margin-top: 5%;
+   order: -1;
+   padding: 2% 3%;
+}
+
+.expandedResultDisplay img {
+    width: 30%;
+}
+
+.expandedImgAndRating {
+    display: flex;
+    flex-direction: column;
+}
+
+.ratingContainer {
+    display: flex;
+}
+
+.ratingContainer .rating{
+    padding: 0;
 }

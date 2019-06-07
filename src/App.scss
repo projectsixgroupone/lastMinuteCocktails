@@ -1,8 +1,10 @@
 
+
+@import 'partials/mainSection';
 @import 'partials/setup.scss';
 @import 'partials/header.scss';
 @import 'partials/ratings.scss';
-@import 'partials/mainSection';
+
 
 
 
@@ -13,11 +15,9 @@ $bodyFont: 'Montserrat', serif;
 
 $mainColor: #5705C5;
 $accentColor: #5FD2B9;
-$fontColor: #E6E0E0;
+$backgroundColor: #E6E0E0;
 
 //main styles
-
-
 
 .wrapper {
   max-width: 90%;
@@ -27,6 +27,7 @@ $fontColor: #E6E0E0;
 
 .App {
   text-align: center;
+
 }
 
 //font styles 
@@ -36,8 +37,14 @@ h1 {
   font-size: 50px;
 }
 
+h2 {
+  font-family: $mainFont;
+}
+
 p {
   font-family: $bodyFont;
 }
+
+
 
 

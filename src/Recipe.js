@@ -99,9 +99,83 @@ export default class Recipe extends Component {
     const expandContent = () =>{
       if (this.state.expand) {
         return(
-          <div>
+          <div className="expandedResultDisplay wrapper">
+            <div className="expandedImgAndRating">
+              <img src={this.props.thumbnail} alt={this.props.name} />
+
+              <div className="ratingContainer">
+                <div className="rating">
+                  <input onClick={this.onRating}
+                    type="radio"
+                    id={'starFive' + this.props.id}
+                    name={'rating' + this.props.id}
+                    checked={this.state.rating === 5}
+                    value="5"
+                  />
+                  <label
+                    className="star"
+                    htmlFor={'starFive' + this.props.id}
+                    title="Awesome"
+                    aria-hidden="true"
+                  />
+                  <input onClick={this.onRating}
+                    type="radio"
+                    id={'starFour' + this.props.id}
+                    name={'rating' + this.props.id}
+                    checked={this.state.rating === 4}
+                    value="4"
+                  />
+                  <label
+                    className="star"
+                    htmlFor={'starFour' + this.props.id}
+                    title="Great"
+                    aria-hidden="true"
+                  />
+                  <input onClick={this.onRating}
+                    type="radio"
+                    id={'starThree' + this.props.id}
+                    name={'rating' + this.props.id}
+                    checked={this.state.rating === 3}
+                    value="3"
+                  />
+                  <label
+                    className="star"
+                    htmlFor={'starThree' + this.props.id}
+                    title="Very good"
+                    aria-hidden="true"
+                  />
+                  <input onClick={this.onRating}
+                    type="radio"
+                    id={'starTwo' + this.props.id}
+                    name={'rating' + this.props.id}
+                    checked={this.state.rating === 2}
+                    value="2"
+                  />
+                  <label
+                    className="star"
+                    htmlFor={'starTwo' + this.props.id}
+                    title="Good"
+                    aria-hidden="true"
+                  />
+                  <input onClick={this.onRating}
+                    type="radio"
+                    id={'starOne' + this.props.id}
+                    name={'rating' + this.props.id}
+                    checked={this.state.rating === 1}
+                    value="1"
+                  />
+                  <label
+                    className="star"
+                    htmlFor={'starOne' + this.props.id}
+                    title="Bad"
+                    aria-hidden="true"
+                  />
+                  {/* <span>{this.state.averageRating}</span> */}
+                </div>
+              </div>
+            </div>
+
             <h2>{this.props.name}</h2>
-            <img src={this.props.thumbnail} alt={this.props.name} />
 
             <h3>Instructions</h3>
             <p>{this.props.instructions}</p>
@@ -123,74 +197,6 @@ export default class Recipe extends Component {
               <button>Add Note</button>
             </form>
 
-            <div className="rating">
-              <input onClick={this.onRating}
-                type="radio"
-                id={'starFive' + this.props.id}
-                name={'rating' + this.props.id}
-                checked={this.state.rating === 5}
-                value="5"
-              />
-              <label
-                className="star"
-                htmlFor={'starFive' + this.props.id}
-                title="Awesome"
-                aria-hidden="true"
-              />
-              <input onClick={this.onRating}
-                type="radio"
-                id={'starFour' + this.props.id}
-                name={'rating' + this.props.id}
-                checked={this.state.rating === 4}
-                value="4"
-              />
-              <label
-                className="star"
-                htmlFor={'starFour' + this.props.id}
-                title="Great"
-                aria-hidden="true"
-              />
-              <input onClick={this.onRating}
-                type="radio"
-                id={'starThree' + this.props.id}
-                name={'rating' + this.props.id}
-                checked={this.state.rating === 3}
-                value="3"
-              />
-              <label
-                className="star"
-                htmlFor={'starThree' + this.props.id}
-                title="Very good"
-                aria-hidden="true"
-              />
-              <input onClick={this.onRating}
-                type="radio"
-                id={'starTwo' + this.props.id}
-                name={'rating' + this.props.id}
-                checked={this.state.rating === 2}
-                value="2"
-              />
-              <label
-                className="star"
-                htmlFor={'starTwo' + this.props.id}
-                title="Good"
-                aria-hidden="true"
-              />
-              <input onClick={this.onRating}
-                type="radio"
-                id={'starOne' + this.props.id}
-                name={'rating' + this.props.id}
-                checked={this.state.rating === 1}
-                value="1"
-              />
-              <label
-                className="star"
-                htmlFor={'starOne' + this.props.id}
-                title="Bad"
-                aria-hidden="true"
-              />
-              <span>{this.state.averageRating}</span>
-            </div>
             <div className="notes">
               {this.state.allNotes.map(note => {
                 return (
@@ -206,82 +212,90 @@ export default class Recipe extends Component {
       } else {
         return(
           <div className="resultDisplay">
-        <h2>{this.props.name}</h2>
+
         <img src={this.props.thumbnail} alt={this.props.name} />
-        <p>{this.props.instructions}</p>
-        <button onClick={() => this.props.storeDrink(this.props.id)}>Favourite This Drink</button>
-      
-        <div className="rating">
-          <input onClick={this.onRating}
-            type="radio"
-            id={'starFive' + this.props.id}
-            name={'rating' + this.props.id}
-            checked={this.state.rating === 5}
-            value="5"
-          />
-          <label
-            className="star"
-            htmlFor={'starFive' + this.props.id}
-            title="Awesome"
-            aria-hidden="true"
-          />
-          <input onClick={this.onRating}
-            type="radio"
-            id={'starFour' + this.props.id}
-            name={'rating' + this.props.id}
-            checked={this.state.rating === 4}
-            value="4"
-          />
-          <label
-            className="star"
-            htmlFor={'starFour' + this.props.id}
-            title="Great"
-            aria-hidden="true"
-          />
-          <input onClick={this.onRating}
-            type="radio"
-            id={'starThree' + this.props.id}
-            name={'rating' + this.props.id}
-            checked={this.state.rating === 3}
-            value="3"
-          />
-          <label
-            className="star"
-            htmlFor={'starThree' + this.props.id}
-            title="Very good"
-            aria-hidden="true"
-          />
-          <input onClick={this.onRating}
-            type="radio"
-            id={'starTwo' + this.props.id}
-            name={'rating' + this.props.id}
-            checked={this.state.rating === 2}
-            value="2"
-          />
-          <label
-            className="star"
-            htmlFor={'starTwo' + this.props.id}
-            title="Good"
-            aria-hidden="true"
-          />
-          <input onClick={this.onRating}
-            type="radio"
-            id={'starOne' + this.props.id}
-            name={'rating' + this.props.id}
-            checked={this.state.rating === 1}
-            value="1"
-          />
-          <label
-            className="star"
-            htmlFor={'starOne' + this.props.id}
-            title="Bad"
-            aria-hidden="true"
-          />
-          <span>{this.state.averageRating}</span>
+        <div className="drinkInfo">
+          <h2>{this.props.name}</h2>
+
+              <div className="rating">
+                <input onClick={this.onRating}
+                  type="radio"
+                  id={'starFive' + this.props.id}
+                  name={'rating' + this.props.id}
+                  checked={this.state.rating === 5}
+                  value="5"
+                />
+                <label
+                  className="star"
+                  htmlFor={'starFive' + this.props.id}
+                  title="Awesome"
+                  aria-hidden="true"
+                />
+                <input onClick={this.onRating}
+                  type="radio"
+                  id={'starFour' + this.props.id}
+                  name={'rating' + this.props.id}
+                  checked={this.state.rating === 4}
+                  value="4"
+                />
+                <label
+                  className="star"
+                  htmlFor={'starFour' + this.props.id}
+                  title="Great"
+                  aria-hidden="true"
+                />
+                <input onClick={this.onRating}
+                  type="radio"
+                  id={'starThree' + this.props.id}
+                  name={'rating' + this.props.id}
+                  checked={this.state.rating === 3}
+                  value="3"
+                />
+                <label
+                  className="star"
+                  htmlFor={'starThree' + this.props.id}
+                  title="Very good"
+                  aria-hidden="true"
+                />
+                <input onClick={this.onRating}
+                  type="radio"
+                  id={'starTwo' + this.props.id}
+                  name={'rating' + this.props.id}
+                  checked={this.state.rating === 2}
+                  value="2"
+                />
+                <label
+                  className="star"
+                  htmlFor={'starTwo' + this.props.id}
+                  title="Good"
+                  aria-hidden="true"
+                />
+                <input onClick={this.onRating}
+                  type="radio"
+                  id={'starOne' + this.props.id}
+                  name={'rating' + this.props.id}
+                  checked={this.state.rating === 1}
+                  value="1"
+                />
+                <label
+                  className="star"
+                  htmlFor={'starOne' + this.props.id}
+                  title="Bad"
+                  aria-hidden="true"
+                />
+                {/* <span>{this.state.averageRating}</span> */}
+
+              </div>
+
+          <p>{this.props.instructions}</p>
+              <button className="favouriteButton" onClick={() => this.props.storeDrink(this.props.id)}><i class="fas fa-heart"></i></button>
+        
+          
+          <button onClick={this.onExpand} className="readMore">
+            Read More
+          </button>
+
         </div>
-        <button onClick={this.onExpand} className="readMore">
-          read more
-        </button>
       </div>
         )
       }

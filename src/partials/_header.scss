@@ -1,0 +1,44 @@
+// variables
+$mainFont: "Playfair Display", serif;
+
+
+
+// mixins
+
+
+
+
+// styles
+
+.header{
+    background-image: url("header-image.jpg");
+    min-width: 100vw;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+h1{
+    font-family: $mainFont;
+    margin: 0 auto;
+    color: #f3f3f3;
+
+}
+
+.header h2 {
+    color: #f3f3f3;
+    font-family: $mainFont;
+}
+.mainForm {
+   margin-top: 50px;
+  
+}
+.wrapper {
+    width: 90%;
+}
+
+
+

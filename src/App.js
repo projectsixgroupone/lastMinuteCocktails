@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       drinkRecipes: [],
       error: false,
-      savedList: {}
+      savedList: {},
+      favouriteDrinks: []
     }
 
   }
@@ -52,6 +53,47 @@ class App extends Component {
       }
     })
   }
+  getFavouriteDrinks = async () => {
+    const url = ` https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+    let favouriteDrinks = [...this.state.favouriteDrinks]
+        
+    let favouriteDrinksRequests = favouriteDrinks.map(async id => {
+      const response = await axios.get(url, {
+        dataResponse: 'json',
+        params: {
+          i: id
+        }
+      })
+      return response.data.drinks
+      })
+      const results = await Promise.all(favouriteDrinksRequests)
+      console.log(results)
+
+      this.setState({
+        drinkRecipes: results.flat()
+      })
+      
+
+    
+    
+  }
+
+  componentDidMount() {
+    const dbref = firebase.database().ref('drinks');
+    dbref.on('value', (response) => {
+      let drinks = response.val()
+      let favouriteDrinks = []
+      drinks = Object.entries(drinks)
+      drinks.map(drink => {
+        if(drink[1].favourite === true) {
+          favouriteDrinks.push(drink[0])
+        }
+      })
+      this.setState({ favouriteDrinks })
+      }      
+      
+    )
+  }
 
 
 
@@ -62,6 +104,7 @@ class App extends Component {
           <h1>Cocktail Generator</h1>
           <h2>Look up any cocktail recipe in our database</h2>
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
+          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks">Favourite Drinks</button>
         </div>
 
         <div className="results">

@@ -22,6 +22,11 @@ export default class Recipe extends Component {
       expand: true
     })
   }
+  onShrink= (event) =>{
+    this.setState({
+      expand: false
+    })
+  }
 
   onChange = (event) => {
     this.setState({
@@ -193,23 +198,18 @@ export default class Recipe extends Component {
                 )
               })}
             </div>
+            <button onClick={this.onShrink} className="readMore">
+              minimize
+            </button>
           </div>
         )
-      }
-    }
-
-    return (
-      <div>
-        {expandContent()}
-        <p>{this.props.name}</p>
+      } else {
+        return(
+          <div>
+        <h2>{this.props.name}</h2>
         <img src={this.props.thumbnail} alt={this.props.name} />
         <p>{this.props.instructions}</p>
         <button onClick={() => this.props.storeDrink(this.props.id)}>Favourite This Drink</button>
-        <form action="submit" onSubmit={this.onSubmit}>
-          <textarea onChange={this.onChange} />
-          <button>Add Note</button>
-        </form>
-
       
         <div className="rating">
           <input onClick={this.onRating}
@@ -279,16 +279,17 @@ export default class Recipe extends Component {
           />
           <span>{this.state.averageRating}</span>
         </div>
-        <div className="notes">
-          {this.state.allNotes.map(note => {
-            return(
-              <p>{note}</p>
-            )
-          })}
-        </div>
         <button onClick={this.onExpand} className="readMore">
           read more
         </button>
+      </div>
+        )
+      }
+    }
+
+    return (
+      <div>
+        {expandContent()}
       </div>
     );
   }

@@ -54,7 +54,7 @@ export default class RecipeList extends Component {
 
   render() {
     return (
-      <div className="recipesContainer">
+      <div className="recipesContainer wrapper">
 
         {this.props.drinkRecipes.map((recipe) => {
           let ingredientArray = this.ingredientList(recipe);

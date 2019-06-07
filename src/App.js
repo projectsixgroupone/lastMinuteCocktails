@@ -57,12 +57,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="header">
-        <h1>Cocktail Generator</h1>
-        <h2>Look up any cocktail recipe in our database</h2>
-        <Form error={this.state.error} handlerFromParent={this.handleInput}/>
-        <RecipeList drinkRecipes={this.state.drinkRecipes}/>
+      <div>
+       <div className ='header'>
+          <h1>Cocktail Generator</h1>
+          <h2>Look up any cocktail recipe in our database</h2>
+          <Form error={this.state.error} handlerFromParent={this.handleInput}/>
+        </div>
+
+        <div className="results">
+          <RecipeList drinkRecipes={this.state.drinkRecipes} />
+        </div>
+
       </div>
+
     );
   }
 }

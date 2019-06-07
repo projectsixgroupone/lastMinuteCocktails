@@ -25,9 +25,13 @@ class Form extends Component {
     return (
 
       <form className ="mainForm wrapper" action="submit" onSubmit={this.onSubmit}>
-        <input type="text" onChange={this.onChange} />
-        {this.props.error === true ? <p>your search returned no results</p> : null}
-        <button className = "mainButton">Search</button>
+        <div className="searchContainer">
+            <input type="text" onChange={this.onChange} />
+            {this.props.error === true ? <p>your search returned no results</p> : null}
+        </div>
+        <div className="searchButtonContainer">
+            <button className="mainButton">Search</button>
+        </div>
 
       </form>
     );

@@ -1,3 +1,8 @@
+
+
+$backgroundColor: #E6E0E0;
+
+
 * {
     padding: 0;
     margin: 0;
@@ -13,14 +18,32 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
 }
 
 .resultDisplay {
     width: calc(25% - 2.5%);
     display: flex;
     flex-direction: column;
+   background-color: white;
+   margin-top: 5%;
+
+}
+
+.drinkInfo {
+    margin: 7%;
 }
 
 .resultDisplay img {
     max-width: 100%;
+
 }
+
+.results {
+    background-color: $backgroundColor;
+}
+
+.rating {
+    padding-right: 5%;
+}
+

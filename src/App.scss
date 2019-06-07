@@ -1,8 +1,10 @@
 
+
+@import 'partials/mainSection';
 @import 'partials/setup.scss';
 @import 'partials/header.scss';
 @import 'partials/ratings.scss';
-@import 'partials/mainSection';
+
 
 
 
@@ -13,7 +15,7 @@ $bodyFont: 'Montserrat', serif;
 
 $mainColor: #5705C5;
 $accentColor: #5FD2B9;
-$fontColor: #E6E0E0;
+$backgroundColor: #E6E0E0;
 
 //main styles
 
@@ -25,6 +27,7 @@ $fontColor: #E6E0E0;
 
 .App {
   text-align: center;
+
 }
 
 //font styles 
@@ -37,5 +40,7 @@ h1 {
 p {
   font-family: $bodyFont;
 }
+
+
 
 

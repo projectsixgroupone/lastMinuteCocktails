@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       drinkRecipes: [],
       error: false,
-      savedList: {}
+      savedList: {},
+      favouriteDrinks: []
     }
 
   }
@@ -51,6 +52,23 @@ class App extends Component {
           })
       }
     })
+  }
+
+  componentDidMount() {
+    const dbref = firebase.database().ref('drinks');
+    dbref.on('value', (response) => {
+      let drinks = response.val()
+      let favouriteDrinks = []
+      drinks = Object.entries(drinks)
+      drinks.map(drink => {
+        if(drink[1].favourite === true) {
+          favouriteDrinks.push(drink[0])
+        }
+      })
+      this.setState({ favouriteDrinks })
+      }      
+      
+    )
   }
 
 

@@ -99,8 +99,8 @@ export default class Recipe extends Component {
     const expandContent = () =>{
       if (this.state.expand) {
         return(
-          <div className="expandedResultDisplay wrapper">
-            <div className="expandedImgAndRating">
+          <div className="expanded wrapper">
+            <div className="ImgAndRating">
               <img src={this.props.thumbnail} alt={this.props.name} />
 
               <div className="ratingContainer">
@@ -175,38 +175,40 @@ export default class Recipe extends Component {
               </div>
             </div>
 
-            <h2>{this.props.name}</h2>
+            
+            <div className="instructionsAndIngredients">
+              <h2>{this.props.name}</h2>
+              <h3>Instructions</h3>
+              <p>{this.props.instructions}</p>
 
-            <h3>Instructions</h3>
-            <p>{this.props.instructions}</p>
+              <h3>Ingredients</h3>
+              <p>{this.props.ingredients.ingredient}</p>
 
-            <h3>Ingredients</h3>
-            <p>{this.props.ingredients.ingredient}</p>
-
-            {this.props.ingredients.map((ingredient) => {
-              return (
-                <li>{ingredient.measurement} {ingredient.ingredient}</li>
-              )
-            })}
-
-
-
-            <button onClick={() => this.props.storeDrink(this.props.id)}>Favourite This Drink</button>
-            <form action="submit" onSubmit={this.onSubmit}>
-              <textarea onChange={this.onChange} />
-              <button>Add Note</button>
-            </form>
-
-            <div className="notes">
-              {this.state.allNotes.map(note => {
+              <ul>{this.props.ingredients.map((ingredient) => {
                 return (
-                  <p>{note}</p>
+                  <li>{ingredient.measurement} {ingredient.ingredient}</li>
                 )
-              })}
+              })}</ul>
             </div>
-            <button onClick={this.onShrink} className="readMore">
-              minimize
-            </button>
+
+            <div className="noteSection">
+              <button onClick={() => this.props.storeDrink(this.props.id)}>Favourite This Drink</button>
+              <form action="submit" onSubmit={this.onSubmit}>
+                <textarea onChange={this.onChange} />
+                <button>Add Note</button>
+              </form>
+
+              <div className="notes">
+                {this.state.allNotes.map(note => {
+                  return (
+                    <p>{note}</p>
+                  )
+                })}
+              </div>
+              <button onClick={this.onShrink} className="readMore">
+                minimize
+              </button>
+            </div>
           </div>
         )
       } else {

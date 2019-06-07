@@ -78,24 +78,40 @@ $accentColor: #5FD2B9;
 
 // EXPANDED RESULTS
 
-.expandedResultDisplay {
+.expanded {
     width: 100%;
     display: flex;
-    flex-direction: column;
-   background-color: white;
-   margin-top: 5%;
-   order: -1;
-   padding: 2% 3%;
-}
-
-.expandedResultDisplay img {
-    width: 30%;
-}
-
-.expandedImgAndRating {
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 5%;
+    order: -1;
+    padding: 2% 3%;
+   
+    img{
+        width: 100%;
+    }
+    .ImgAndRating {
     display: flex;
     flex-direction: column;
+    flex: 1 1 200px;
+    }
+    .instructionsAndIngredients  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1 1 300px;
+    }
+    h2 {
+        flex-basis: 100%;
+    }
+    .noteSection {
+        width: 100%;
+    }
 }
+
+
+
 
 .ratingContainer {
     display: flex;
@@ -104,3 +120,4 @@ $accentColor: #5FD2B9;
 .ratingContainer .rating{
     padding: 0;
 }
+

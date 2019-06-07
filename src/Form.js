@@ -27,7 +27,7 @@ class Form extends Component {
       <form className ="mainForm wrapper" action="submit" onSubmit={this.onSubmit}>
         <input type="text" onChange={this.onChange} />
         {this.props.error === true ? <p>your search returned no results</p> : null}
-        <button>Search</button>
+        <button className = "mainButton">Search</button>
 
       </form>
     );

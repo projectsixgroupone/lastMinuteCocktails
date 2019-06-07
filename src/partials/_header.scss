@@ -20,24 +20,35 @@ $mainFont: "Playfair Display", serif;
     justify-content: center;
     align-content: center;
 }
-
 h1{
     font-family: $mainFont;
     margin: 0 auto;
     color: #f3f3f3;
-
 }
 
 .header h2 {
     color: #f3f3f3;
     font-family: $mainFont;
+    text-align: center;
+    padding-bottom: 20px;
 }
 .mainForm {
    margin-top: 50px;
-  
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
-.wrapper {
-    width: 90%;
+.mainForm input[type=text] {
+    width: 200px;
+    margin-bottom: 20px;
+}
+.mainButton {
+    font-family: serif;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #grey ;
 }
 
 

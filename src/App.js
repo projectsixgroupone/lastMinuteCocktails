@@ -57,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App-header">
         <h1>Last Minute Cocktail Generator</h1>
         <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         <RecipeList drinkRecipes={this.state.drinkRecipes}/>

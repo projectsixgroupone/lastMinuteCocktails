@@ -56,8 +56,7 @@ class App extends Component {
   getFavouriteDrinks = async () => {
     const url = ` https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
     let favouriteDrinks = [...this.state.favouriteDrinks]
-    let favouriteDrinksArray = []
-    
+        
     let favouriteDrinksRequests = favouriteDrinks.map(async id => {
       const response = await axios.get(url, {
         dataResponse: 'json',

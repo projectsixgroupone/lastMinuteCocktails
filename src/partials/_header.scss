@@ -8,14 +8,14 @@ header {
     background-image: url("header-image.jpg");
     min-width: 100vw;
     background-size: cover;
-    min-height: 100vh;
+    min-height: 94vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
      h2 {
         color: #f3f3f3;
-        font-family: $mainFont;
+        font-family: $bodyFont;
         text-align: center;
         padding-bottom: 10px;
      }
@@ -42,9 +42,9 @@ h1, h2 {
 
 
 
-.searchButtonContainer {
-    width: 17%;
-}
+// .searchButtonContainer {
+//     width: 100%;
+// }
 
 .mainForm {
    margin-top: 50px;
@@ -53,11 +53,12 @@ h1, h2 {
    flex-direction: column;
    justify-content: center;
    align-items: center;
+
       
 }
 
  .mainForm input[type=text] {
-    width: 75%;
+    width: 100%;
     height: 35px;
     padding: 3px 20px;
     border: none;
@@ -86,7 +87,7 @@ h1, h2 {
     padding: 5px 10px;
     color: $mainColor;
     background-color: $accentColor;
-    width: 100%;
+    // width: 100%;
     border-radius: 20px;
     border: none;
     font-family: $bodyFont;

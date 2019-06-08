@@ -4,110 +4,167 @@ $backgroundColor: #E6E0E0;
 $accentColor: #5FD2B9;
 
 
-* {
-    padding: 0;
-    margin: 0;
-}
+
 
 .wrapper {
-    width: 90%;
-    max-width: 1600px;
-    margin: 0 auto;
+  width: 90%;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .recipesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
 }
 
-.resultDisplay {
-    width: calc(25% - 2.5%);
-    display: flex;
-    flex-direction: column;
-   background-color: white;
-   margin-top: 5%;
-    position: relative;
+.recipeBox {
+  width: calc(25% - 2.5%);
+  display: flex;
+  flex: 1 0 250px;
+  flex-direction: column;
+  background-color: white;
+  margin: 20px;
+  position: relative;
+  max-width: 400px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
+  img {
+    max-width: 100%;
+  }
+  &.expanded {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .drinkInfo {
-    margin: 7%;
+  margin: 7%;
 }
 
 .drinkInfo p {
-    margin: 10px 0;
-    line-height: 1.4;
-    font-size: 19px;
-}
-
-.resultDisplay img {
-    max-width: 100%;
+  margin: 10px 0;
+  line-height: 1.5;
+  font-size: .8rem;
 }
 
 .results {
-    background-color: $backgroundColor;
+  background-color: $backgroundColor;
 }
 
 .rating {
-    padding-right: 5%;
+  padding-right: 5%;
 }
 
 .favouriteButton {
+  background-color: $backgroundColor;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 300ms;
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+  &.unfavourite {
     background-color: $accentColor;
-    color: white;
-    border-radius: 50%;
-    padding: 8px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    color: #e74c3c;
+  }
 }
 
 .favouriteButton i {
-    font-size: 28px;
+  font-size: 28px; 
 }
 
 .readMore {
-    border: none;
-    color: $mainColor;
-    font-size: 25px;
-    width: 100%;
-    text-align: left;
+  border: none;
+  color: $mainColor;
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+
+  &.less{
+    margin-top: auto;
+  }
 }
 
 // EXPANDED RESULTS
 
 .expanded {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  
+  img{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    background-color: white;
-    margin-top: 5%;
-    order: -1;
-    padding: 2% 3%;
-   
-    img{
-        width: 100%;
-    }
-    .ImgAndRating {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 200px;
-    }
-    .instructionsAndIngredients  {
+  }
+  .imgAndRating {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 200px;
+  }
+  .moreDetails  {
+  flex: 1 1 300px;
+  }
+
+  .ingredientsInstructions {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     flex-wrap: wrap;
-    flex: 1 1 300px;
+
+    .ingredients {
+      flex: 0 1 150px;
+      margin: 10px;
     }
-    h2 {
-        flex-basis: 100%;
+    .instructions {
+      flex: 1 1 250px;
+      margin: 10px;
     }
-    .noteSection {
-        width: 100%;
+  }
+  h2 {
+    flex-basis: 100%;
+    margin: 0 10px;
+  }
+  ul {
+    list-style: none;
+
+    font-family: $bodyFont;
+  }
+  .noteSection {
+    width: 100%;
+    margin: 10px;
+
+    p {
+      display: block;
+      padding: 5px;
+      margin: 10px 0;
+      background: #f8f8f8;
+
     }
+    button {
+      padding: 4px 10px;
+      margin: 10px 0;
+      color: #fff;
+      background: $mainColor;
+
+    }
+  }
+  textarea {
+    width: 100%;
+    border: 1px solid $backgroundColor;
+    resize: none;
+  }
 }
 
 

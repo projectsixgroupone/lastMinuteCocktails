@@ -5,6 +5,10 @@ import firebase from './firebase';
 
 
 export default class RecipeList extends Component {
+  constructor() {
+    super();
+    this.myRef = React.createRef();
+  }
   ingredientList = (recipe) => {
     // Arrays to store the ingredients and coressponding measurements of each drink in results
     let ingredientArray = [];
@@ -23,11 +27,17 @@ export default class RecipeList extends Component {
     return ingredientArray;
   }
 
-  // storeDrink is a method that takes the id of a resulting drink and stores it to the firebase database. When stored, the ids are all stored under 1 parent, and each contain a child specifying if it's favourited
-  storeDrink = (drinkId) => {
+  // favouriteDrink is a method that takes the id of a resulting drink and stores it to the firebase database. When stored, the ids are all stored under 1 parent, and each contain a child specifying if it's favourited
+  favouriteDrink = (drinkId) => {
     const dbref = firebase.database().ref('drinks/' + drinkId);
     dbref.update({
       favourite: true
+    })
+  }
+  unfavouriteDrink = (drinkId) => {
+    const dbref = firebase.database().ref('drinks/' + drinkId);
+    dbref.update({
+      favourite: false
     })
   }
   addNote = (drinkId, note) => {
@@ -49,12 +59,20 @@ export default class RecipeList extends Component {
 
     })
   }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.drinkRecipes !== this.props.drinkRecipes) {
+      this.myRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "start"
+      })
+    }
+  }
 
   // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
 
   render() {
     return (
-      <div className="recipesContainer wrapper">
+      <div className="recipesContainer wrapper" ref={this.myRef}>
 
         {this.props.drinkRecipes.map((recipe) => {
           let ingredientArray = this.ingredientList(recipe);
@@ -65,7 +83,8 @@ export default class RecipeList extends Component {
               thumbnail={recipe.strDrinkThumb}
               ingredients={ingredientArray}
               instructions={recipe.strInstructions}
-              storeDrink={this.storeDrink}
+              favouriteDrink={this.favouriteDrink}
+              unfavouriteDrink={this.unfavouriteDrink}
               addNote={this.addNote}
               id={recipe.idDrink}
               addRating={this.addRating}

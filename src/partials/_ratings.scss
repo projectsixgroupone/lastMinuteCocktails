@@ -6,7 +6,7 @@
   border: none;
   display: flex;
   flex-direction: row-reverse;
- 
+  justify-content: start;
 }
 
 .rating > label {
@@ -17,7 +17,7 @@
 .rating > label::before {
   content: "\f005";
   margin: 5px;
-  font-size: 2em;
+  font-size: 1em;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;

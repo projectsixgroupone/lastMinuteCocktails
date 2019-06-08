@@ -204,7 +204,7 @@ export default class Recipe extends Component {
               <button onClick={this.onShrink} className="readMore less">
                 Show Less
               </button>
-              {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button>}
+              {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)} tabIndex="0" aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} tabIndex="0" aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
             </div>
 
             
@@ -212,10 +212,10 @@ export default class Recipe extends Component {
               <h2>{this.props.name}</h2>
               <div className="ingredientsInstructions">
               <div className="ingredients">
-                <h3>Ingredients</h3>
+                <h3 tabIndex="0">Ingredients</h3>
                 <p>{this.props.ingredients.ingredient}</p>
 
-                <ul>{this.props.ingredients.map((ingredient, index) => {
+                  <ul tabIndex="0">{this.props.ingredients.map((ingredient, index) => {
                   return (
                     <li key={index}>{ingredient.measurement} {ingredient.ingredient}</li>
                   )
@@ -228,17 +228,17 @@ export default class Recipe extends Component {
               </div>
 
               <div className="noteSection">
-                <h3>Notes</h3>
+                <h3 tabIndex="0">Notes</h3>
                 <div className="notes">
                   {this.state.allNotes.map((note, index) => {
                     return (
-                      <p key={index}><span className="noteName">{note.name ? note.name : 'Guest'}:</span> {note.note}</p>
+                      <p key={index} tabIndex="0"><span className="noteName">{note.name ? note.name : 'Guest'}:</span> {note.note}</p>
                     )
                   })}
                 </div>
                 <form action="submit" onSubmit={this.onSubmit}>
                   <input type="text" onChange={this.onNameChange} placeholder="Name"/>
-                  <textarea onChange={this.onChange} placeholder="Enter your note..." />
+                  <textarea onChange={this.onChange} placeholder="Enter your note..." tabIndex="0" aria-label="Enter Your Note Here"/>
                   <button className="addNote">Add Note</button>
                 </form>
               </div>
@@ -253,7 +253,7 @@ export default class Recipe extends Component {
       } else {
         return(
           <div className="recipeBox" ref={this.myRef}>
-            <img src={this.props.thumbnail} alt={this.props.name} />
+            <img src={this.props.thumbnail} alt={this.props.name} tabIndex="0" />
             <div className="drinkInfo">
               <h2 aria-label={this.props.name}>{this.props.name}</h2>
 
@@ -328,7 +328,7 @@ export default class Recipe extends Component {
                   </div>
 
               <p tabIndex="0">{this.props.instructions}</p>
-                {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button>}
+                {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
             
               
               <button onClick={this.onExpand} className="readMore" aria-label="read more">

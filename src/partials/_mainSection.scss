@@ -17,6 +17,7 @@ $accentColor: #5FD2B9;
   flex-wrap: wrap;
   justify-content: flex-start;
 
+
 }
 
 .recipeBox {
@@ -51,6 +52,7 @@ $accentColor: #5FD2B9;
 
 .results {
   background-color: $backgroundColor;
+  
 }
 
 .rating {
@@ -168,6 +170,12 @@ $accentColor: #5FD2B9;
       margin: 10px 0;
       color: #fff;
       background: $mainColor;
+        &:hover {
+            background-color: lighten($mainColor, 20)
+    }
+        &:active{
+            background-color: lighten($mainColor, 20)
+    }
 
       &:hover{
         background: darken($mainColor, 10)

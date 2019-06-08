@@ -327,7 +327,7 @@ export default class Recipe extends Component {
 
                   </div>
 
-              <p tabIndex="0">{this.props.instructions}</p>
+              <p tabIndex="0">{this.props.instructions.length > 125 ? this.props.instructions.substring(0,122)+"..." : this.props.instructions }</p>
                 {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
             
               

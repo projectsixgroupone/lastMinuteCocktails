@@ -248,7 +248,7 @@ export default class Recipe extends Component {
           <div className="recipeBox" ref={this.myRef}>
             <img src={this.props.thumbnail} alt={this.props.name} />
             <div className="drinkInfo">
-              <h2>{this.props.name}</h2>
+              <h2 aria-label={this.props.name}>{this.props.name}</h2>
 
                   <div className="rating">
                     <input onChange={this.onRating}
@@ -320,11 +320,11 @@ export default class Recipe extends Component {
 
                   </div>
 
-              <p>{this.props.instructions}</p>
+              <p tabIndex="0">{this.props.instructions}</p>
                 {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)}><i className="fas fa-heart"></i></button>}
             
               
-              <button onClick={this.onExpand} className="readMore">
+              <button onClick={this.onExpand} className="readMore" aria-label="read more">
                 Read More
               </button>
 

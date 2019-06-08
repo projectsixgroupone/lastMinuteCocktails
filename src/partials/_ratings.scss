@@ -10,7 +10,7 @@
 }
 
 .rating > label {
-  color: #90A0A3;
+  color: $backgroundColor;
 
 }
 
@@ -30,12 +30,12 @@
 .rating > input:checked ~ label,
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
-  color: #F79426;
+  color: $accentColor;
 }
 
 .rating > input:checked + label:hover,
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label,
 .rating > input:checked ~ label:hover ~ label {
-  color: #FECE31;
+  color: darken($accentColor, 20);
 }

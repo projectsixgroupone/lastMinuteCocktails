@@ -1,4 +1,10 @@
-.header{
+$accentColor: #5FD2B9;
+$mainColor: #5705C5;
+
+
+
+
+header {
     background-image: url("header-image.jpg");
     min-width: 100vw;
     background-size: cover;
@@ -7,23 +13,34 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
+     h2 {
+        color: #f3f3f3;
+        font-family: $mainFont;
+        text-align: center;
+        padding-bottom: 10px;
+     }
 }
+
 h1{
     font-family: $mainFont;
     margin: 0 auto;
     color: #f3f3f3;
 }
 
-.header h2 {
-    color: #f3f3f3;
-    font-family: $mainFont;
-    text-align: center;
-    padding-bottom: 20px;
+h1, h2 {
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
+
 .searchContainer {
     width: 40%;
     margin-bottom: 1%;
+     p {
+         color: white;
+     }
 }
+
+
 
 .searchButtonContainer {
     width: 17%;
@@ -36,19 +53,70 @@ h1{
    flex-direction: column;
    justify-content: center;
    align-items: center;
+      
 }
-.mainForm input[type=text] {
-    width: 70%;
-    height: 40px;
-    padding: 3px 0;
+
+ .mainForm input[type=text] {
+    width: 75%;
+    height: 35px;
+    padding: 3px 20px;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        &:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+
+        &:focus {
+            border: 1px solid black;
+        }
+   
 }
+
+
+
+
 .mainButton {
-    font-family: serif;
+     display: inline-block;
+    transition-duration: 0.2s;
+    transition-property: transform;
+    -webkit-tap-highlight-color: transparent;
+    transform: translateZ(0);
     padding: 5px 10px;
-    color: grey ;
+    color: $mainColor;
+    background-color: $accentColor;
     width: 100%;
     border-radius: 20px;
+    border: none;
+    font-family: $bodyFont;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        &:hover {
+            transform: scale(1.08);
+     }
+        &:active {
+            background-color: rgb(86, 187, 165);
 
+        }
+        &:focus {
+            background-color: rgb(86, 187, 165);
+     
+        }       
+}
+
+
+
+button.favouriteDrinks {
+    width: 300px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 50px;
+    left: 40px;
+    font-family: $bodyFont;
+      
 }
 
 

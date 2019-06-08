@@ -99,6 +99,10 @@ $accentColor: #5FD2B9;
   &.less{
     margin-top: auto;
   }
+
+  &:hover {
+      color: lighten($mainColor, 20)
+  }
 }
 
 // EXPANDED RESULTS
@@ -189,14 +193,29 @@ $accentColor: #5FD2B9;
   }
 }
 
+.noteSection button, 
+.expanded .ratingContainer {
+
+    margin: 20px 0;
+}
+
+
+textarea {
+    overflow: hidden;
+    resize: none;
+    height: 100px;
+    width: 543px;
+}
+
 
 
 
 .ratingContainer {
     display: flex;
+        .rating {
+            padding: 0;
+        }
 }
 
-.ratingContainer .rating{
-    padding: 0;
-}
+
 

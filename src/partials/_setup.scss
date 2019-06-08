@@ -6,4 +6,34 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
+$mainFont: 'Playfair Display', serif;
+$bodyFont: 'Montserrat', serif;
 
+$mainColor: #5705C5;
+$accentColor: #5FD2B9;
+$backgroundColor: #E6E0E0;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: $bodyFont;
+}
+
+html {
+  font-size: 125%;
+}
+
+p {
+  line-height: 1.5;
+  font-size: .8rem;
+}
+
+li {
+  margin: .5em 0;
+  font-size: .8rem;
+}

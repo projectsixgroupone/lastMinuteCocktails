@@ -40,9 +40,9 @@ export default class RecipeList extends Component {
       favourite: false
     })
   }
-  addNote = (drinkId, note) => {
+  addNote = (drinkId, note, name) => {
     const dbref = firebase.database().ref('drinks/' + drinkId + '/notes');
-    dbref.push({ note })
+    dbref.push({ note, name })
   }
 
   addRating = (drinkId, rating) => {

@@ -9,6 +9,7 @@ export default class Recipe extends Component {
     super()
     this.state = {
       note: '',
+      noteName: '',
       rating: null,
       totalRating: [],
       averageRating: null,
@@ -46,10 +47,15 @@ export default class Recipe extends Component {
       note: event.target.value
     })
   }
+  onNameChange = (event) => {
+    this.setState({
+      noteName: event.target.value
+    })
+  }
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.addNote(this.props.id, this.state.note)
+    this.props.addNote(this.props.id, this.state.note, this.state.noteName)
     // this.props.handlerFromParent(this.state.value)
   }
 
@@ -83,7 +89,7 @@ export default class Recipe extends Component {
           const notes = response.val().notes;
           const newNotes = [];
           for (let key in notes) {
-            newNotes.push(notes[key].note)
+            newNotes.push({note: notes[key].note, name: notes[key].name})
           }
           console.log(notes);
           console.log(newNotes);
@@ -215,10 +221,10 @@ export default class Recipe extends Component {
                   )
                 })}</ul>
               </div>
-              <div className="instructions">
-                <h3>Instructions</h3>
-                <p>{this.props.instructions}</p>
-              </div>
+                <div className="instructions">
+                  <h3>Instructions</h3>
+                  <p>{this.props.instructions}</p>
+                </div>
               </div>
 
               <div className="noteSection">
@@ -226,12 +232,13 @@ export default class Recipe extends Component {
                 <div className="notes">
                   {this.state.allNotes.map((note, index) => {
                     return (
-                      <p key={index}>{note}</p>
+                      <p key={index}><span className="noteName">{note.name ? note.name : 'Guest'}:</span> {note.note}</p>
                     )
                   })}
                 </div>
                 <form action="submit" onSubmit={this.onSubmit}>
-                  <textarea onChange={this.onChange} />
+                  <input type="text" onChange={this.onNameChange} placeholder="Name"/>
+                  <textarea onChange={this.onChange} placeholder="Enter your note..." />
                   <button className="addNote">Add Note</button>
                 </form>
               </div>

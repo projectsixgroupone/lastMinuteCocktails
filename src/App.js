@@ -100,9 +100,9 @@ class App extends Component {
   render() {
     return (
       <div>
-       <div className ='header'>
+       <header>
           <h1>Cocktail Generator</h1>
-          <h2>Look up any cocktail recipe in our database</h2>
+          <h2>Look Up Any Cocktail In Our Database</h2>
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
           <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
         </div>
@@ -110,6 +110,10 @@ class App extends Component {
         <div className="results">
           <RecipeList drinkRecipes={this.state.drinkRecipes} />
         </div>
+
+        <footer>
+          <p>Copyright Ⓒ 2019</p>
+        </footer>
 
       </div>
 

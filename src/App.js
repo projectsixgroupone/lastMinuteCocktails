@@ -102,13 +102,17 @@ class App extends Component {
       <div>
        <div className ='header'>
           <h1>Cocktail Generator</h1>
-          <h2>Look up any cocktail recipe in our database</h2>
+          <h2>Look Up Any Cocktail In Our Database To Recieve A Recipe</h2>
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
-          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks">Favourite Drinks</button>
+          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks wrapper">Explore Favourite Coctails</button>
         </div>
 
         <div className="results">
           <RecipeList drinkRecipes={this.state.drinkRecipes} />
+        </div>
+
+        <div className="footer">
+          <p>Copyright Ⓒ 2019</p>
         </div>
 
       </div>

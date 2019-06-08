@@ -104,7 +104,7 @@ class App extends Component {
           <h1>Cocktail Generator</h1>
           <h2>Look Up Any Cocktail In Our Database</h2>
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
-          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks wrapper">Explore Favourite Coctails</button>
+          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
         </header>
 
         <div className="results">

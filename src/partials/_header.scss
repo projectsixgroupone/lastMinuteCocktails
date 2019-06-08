@@ -92,14 +92,14 @@ h1, h2 {
     font-family: $bodyFont;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         &:hover {
-            transform: scale(1.08);
+            transform: scale(1.02);
      }
         &:active {
-            background-color: rgb(86, 187, 165);
+            background-color: lighten($accentColor, 20);
 
         }
         &:focus {
-            background-color: rgb(86, 187, 165);
+            background-color: lighten($accentColor, 20) ;
      
         }       
 }
@@ -111,13 +111,16 @@ button.favouriteDrinks {
     background: none;
     border: none;
     font-size: 20px;
-    color: white;
+    color: $accentColor;
     position: absolute;
     top: 50px;
     left: 40px;
     font-family: $bodyFont;
-      
+        &:hover {
+            color: lighten($accentColor, 20)
+    }
+        &:active{
+            color: lighten($accentColor, 20)
+    }
+
 }
-
-
-

@@ -100,20 +100,20 @@ class App extends Component {
   render() {
     return (
       <div>
-       <div className ='header'>
+       <header>
           <h1>Cocktail Generator</h1>
-          <h2>Look Up Any Cocktail In Our Database To Recieve A Recipe</h2>
+          <h2>Look Up Any Cocktail In Our Database</h2>
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
           <button onClick={this.getFavouriteDrinks} className="favouriteDrinks wrapper">Explore Favourite Coctails</button>
-        </div>
+        </header>
 
         <div className="results">
           <RecipeList drinkRecipes={this.state.drinkRecipes} />
         </div>
 
-        <div className="footer">
+        <footer>
           <p>Copyright Ⓒ 2019</p>
-        </div>
+        </footer>
 
       </div>
 

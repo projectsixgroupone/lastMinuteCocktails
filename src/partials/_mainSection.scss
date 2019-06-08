@@ -92,6 +92,10 @@ $accentColor: #5FD2B9;
   &.less{
     margin-top: auto;
   }
+
+  &:hover {
+      color: lighten($mainColor, 20)
+  }
 }
 
 // EXPANDED RESULTS
@@ -186,9 +190,10 @@ textarea {
 
 .ratingContainer {
     display: flex;
+        .rating {
+            padding: 0;
+        }
 }
 
-.ratingContainer .rating{
-    padding: 0;
-}
+
 

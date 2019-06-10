@@ -122,6 +122,17 @@
   flex: 0 1 200px;
   margin: 10px;
   }
+  .ratingContainer {
+    display: flex;
+    flex-wrap: wrap;
+      .rating {
+        padding: 0;
+      }
+      .ratingCount {
+        flex: 1 1 100%;
+        padding: 4px;
+      }
+}
   .moreDetails  {
   flex: 1 1 300px;
   }
@@ -179,9 +190,16 @@
     .noteName {
       font-family: $mainFont;
     }
+    .noteError {
+      background: none;
+      color: $mainColor;
+    }
   }
   textarea {
     resize: none;
+  }
+  input {
+    max-width: 300px;
   }
   input, textarea {
     border: 1px solid $backgroundColor;
@@ -203,12 +221,7 @@ textarea {
 
 
 
-.ratingContainer {
-    display: flex;
-        .rating {
-            padding: 0;
-        }
-}
+
 
 
 

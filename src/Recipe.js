@@ -14,6 +14,7 @@ export default class Recipe extends Component {
       totalRating: [],
       averageRating: null,
       allNotes: [],
+      noteError: false,
       expand: false,
       favourited: false
     }
@@ -55,7 +56,17 @@ export default class Recipe extends Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.addNote(this.props.id, this.state.note, this.state.noteName)
+    this.setState({
+      noteError: false
+    })
+    if(this.state.note !== '') {
+      this.props.addNote(this.props.id, this.state.note, this.state.noteName)
+    } else {
+      this.setState({
+        noteError: true
+      })
+
+    }
     // this.props.handlerFromParent(this.state.value)
   }
 
@@ -200,6 +211,7 @@ export default class Recipe extends Component {
                   />
                   {/* <span>{this.state.averageRating}</span> */}
                 </div>
+                <div className="ratingCount"><p>{this.state.totalRating.length} ratings</p></div>
               </div>
               <button onClick={this.onShrink} className="readMore less">
                 Show Less
@@ -239,6 +251,7 @@ export default class Recipe extends Component {
                 <form action="submit" onSubmit={this.onSubmit}>
                   <input type="text" onChange={this.onNameChange} placeholder="Name"/>
                   <textarea onChange={this.onChange} placeholder="Enter your note..." tabIndex="0" aria-label="Enter Your Note Here"/>
+                  <div>{this.state.noteError ? <p className="noteError">Did you forget to add your comment?</p> :  null }</div>
                   <button className="addNote">Add Note</button>
                 </form>
               </div>

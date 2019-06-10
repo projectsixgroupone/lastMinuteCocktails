@@ -6,88 +6,32 @@
 @import 'partials/footer.scss';
 
 
-
-//main styles
-
-.wrapper {
-  max-width: 90%;
-  margin: 0 auto;
-
-}
-
-.App {
-  text-align: center;
-
-}
-
-//font styles 
-
-h1 {
-  font-family: $mainFont;
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-family: $mainFont;
-}
-
-p {
-  font-family: $bodyFont;
-}
-
 // media queries
 
 @media (max-width: 805px) {
   h1 {
-      font-size: 2rem;
+    font-size: 2rem;
   }
-  header h2 {
-      font-size: 1.2rem;
+  .recipesContainer {
+    justify-content: center;
   }
-  .searchContainer {
-    width: 56%;
-  }
-button.favouriteDrinks {
-  width: 203px;
-  left: 0;
-}
-}
-
-@media (max-width: 625px) {
-  h1 {
-      font-size: 1.7rem;
-      text-align: center;
-  }
- header h2 {
-    display: none;
- }
-.recipesContainer {
- justify-content: center;
-
-}
-
 }
 
 @media (max-width: 425px) {
   h1 {
-      font-size: 1.3rem;
+    font-size: 1.7rem;
   }
-input, select, textarea {
-  font-size: 85%;
+  input, select, textarea {
+    font-size: 85%;
+    }
+    
+  .recipesContainer {
+    justify-content: center;
+  }
 
- }
-.recipesContainer {
- justify-content: center;
-
-}
-
-.mainButton {
-  padding: 7px 25px;
-  font-size: 85%;
-}
-button.favouriteDrinks {
-font-size: 16px;
-}
+  .mainButton {
+    padding: 7px 25px;
+  }
 }
 
 

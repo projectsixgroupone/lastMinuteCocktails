@@ -100,16 +100,23 @@ class App extends Component {
   render() {
     return (
       <div>
-       <header>
-          <h1>Last Minute Cocktail Generator</h1>
-          <h2>Look Up Any Cocktail In Our Database</h2>
+        <header>
+          <nav>
+            <div className="wrapper">
+              <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
+            </div>
+          </nav>
+          <div className="wrapper">
+            <h1>Last Minute Cocktails</h1>
+            <h2>Find the perfect recipe for your next drink!</h2>
+          </div>
+
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
-          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
         </header>
 
-        <div className="results">
+        <main className="results">
           <RecipeList drinkRecipes={this.state.drinkRecipes} />
-        </div>
+        </main>
 
         <footer>
           <p>Copyright Ⓒ 2019</p>

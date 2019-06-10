@@ -14,6 +14,7 @@ export default class Recipe extends Component {
       totalRating: [],
       averageRating: null,
       allNotes: [],
+      noteError: false,
       expand: false,
       favourited: false
     }
@@ -55,7 +56,17 @@ export default class Recipe extends Component {
 
   onSubmit = (event) => {
     event.preventDefault()
-    this.props.addNote(this.props.id, this.state.note, this.state.noteName)
+    this.setState({
+      noteError: false
+    })
+    if(this.state.note !== '') {
+      this.props.addNote(this.props.id, this.state.note, this.state.noteName)
+    } else {
+      this.setState({
+        noteError: true
+      })
+
+    }
     // this.props.handlerFromParent(this.state.value)
   }
 
@@ -69,7 +80,7 @@ export default class Recipe extends Component {
 
     })
     this.props.addRating(this.props.id, ratings)
-    console.log(ratings)
+    // console.log(ratings)
   }
 
 
@@ -200,6 +211,7 @@ export default class Recipe extends Component {
                   />
                   {/* <span>{this.state.averageRating}</span> */}
                 </div>
+                <div className="ratingCount"><p>{this.state.totalRating.length} ratings</p></div>
               </div>
               <button onClick={this.onShrink} className="readMore less">
                 Show Less
@@ -239,6 +251,7 @@ export default class Recipe extends Component {
                 <form action="submit" onSubmit={this.onSubmit}>
                   <input type="text" onChange={this.onNameChange} placeholder="Name"/>
                   <textarea onChange={this.onChange} placeholder="Enter your note..." tabIndex="0" aria-label="Enter Your Note Here"/>
+                  <div>{this.state.noteError ? <p className="noteError">Did you forget to add your comment?</p> :  null }</div>
                   <button className="addNote">Add Note</button>
                 </form>
               </div>
@@ -327,7 +340,7 @@ export default class Recipe extends Component {
 
                   </div>
 
-              <p tabIndex="0">{this.props.instructions}</p>
+              <p tabIndex="0">{this.props.instructions.length > 125 ? this.props.instructions.substring(0,122)+"..." : this.props.instructions }</p>
                 {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
             
               

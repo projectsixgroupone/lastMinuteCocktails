@@ -9,14 +9,48 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 $mainFont: 'Playfair Display', serif;
 $bodyFont: 'Montserrat', serif;
 
-$mainColor: #5705C5;
-$accentColor: #5FD2B9;
-$backgroundColor: #E6E0E0;
+$mainColor: #5805c6;
+$accentColor: #60d3ba;
+$textColor: #2c3e50;
+$backgroundColor: #e6e1e1;
+
 
 * {
   padding: 0;
   margin: 0;
 }
+
+//main styles
+
+.wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+
+}
+
+//font styles 
+
+h1 {
+  font-family: $mainFont;
+  font-size: 2.5rem;
+}
+
+h2, h3 {
+  font-family: $mainFont;
+}
+
+h2, h3, p, input, li {
+  color: #2c3e50;
+}
+
+p, input, li, textarea {
+  font-family: $bodyFont;
+}
+input::placeholder, textarea::placeholder  {
+  color: #2c3e50;
+  opacity: .8;
+}
+
 
 button {
   border: none;

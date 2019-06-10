@@ -1,12 +1,12 @@
 // star rating system styles 
-
+// adapted from https://codepen.io/recodenow/pen/YZqgZW
 
 .rating {
   margin-top: 10px;
   border: none;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: start;
+  justify-content: flex-end;
 }
 
 .rating > label {

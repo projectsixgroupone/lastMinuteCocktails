@@ -6,36 +6,33 @@
 @import 'partials/footer.scss';
 
 
+// media queries
 
-//main styles
-
-.wrapper {
-  max-width: 90%;
-  margin: 0 auto;
-
+@media (max-width: 805px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .recipesContainer {
+    justify-content: center;
+  }
 }
 
-.App {
-  text-align: center;
+@media (max-width: 425px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+  input, select, textarea {
+    font-size: 85%;
+    }
+    
+  .recipesContainer {
+    justify-content: center;
+  }
 
+  .mainButton {
+    padding: 7px 25px;
+  }
 }
-
-//font styles 
-
-h1 {
-  font-family: $mainFont;
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-family: $mainFont;
-}
-
-p {
-  font-family: $bodyFont;
-}
-
-
 
 
 

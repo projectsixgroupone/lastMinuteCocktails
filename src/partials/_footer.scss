@@ -1,11 +1,13 @@
-
-$mainColor: #5705C5;
-
 footer {
-    text-align: center;
-    color: white;
-    background-color: #34495e;
-    padding: 12px;
-    min-height: 6vh;
+  text-align: center;
 
+  background-color: #34495e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 6vh;
+
+  p {
+    color: white;
+  }
 }

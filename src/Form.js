@@ -26,8 +26,8 @@ class Form extends Component {
 
       <form className ="mainForm wrapper" action="submit" onSubmit={this.onSubmit}>
         <div className="searchContainer">
-            <input type="text" aria-label="Type search here" onChange={this.onChange} />
-            {this.props.error === true ? <p>your search returned no results</p> : null}
+            <input type="text" aria-label="Type search here" onChange={this.onChange} placeholder="Cocktail Name" />
+            {this.props.error === true ? <p>Your search returned no results.</p> : null}
         </div>
         <div className="searchButtonContainer">
             <button className="mainButton" aria-label="search">Search</button>

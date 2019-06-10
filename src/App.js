@@ -113,6 +113,7 @@ class App extends Component {
 
     this.setState({
       drinkRecipes: results.flat(),
+      filteredDrinks: []
     });
   };
 
@@ -139,29 +140,26 @@ class App extends Component {
     return (
       <div>
         <header>
-          <h1>Last Minute Cocktail Generator</h1>
-          <h2>Look Up Any Cocktail In Our Database</h2>
-          <Form
-            error={this.state.error}
-            handlerFromParent={this.handleInput}
-          />
-          <button
-            onClick={this.getFavouriteDrinks}
-            className="favouriteDrinks"
-            aria-label="Favourite Drinks"
-          >
-            Favourite Drinks
-          </button>
+          <nav>
+            <div className="wrapper">
+              <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
+            </div>
+          </nav>
+          <div className="wrapper">
+            <h1>Last Minute Cocktails</h1>
+            <h2>Find the perfect recipe for your next drink!</h2>
+          </div>
+
+          <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         </header>
 
-        <div className="results">
-          
+        <main className="results">
           {this.state.drinkRecipes.length > 0 ? <Dropdown getFilteredDrinks={this.getFilteredDrinks} />:null}
           <RecipeList
             filteredDrinks={this.state.filteredDrinks}
             drinkRecipes={drinkRecipes}
           />
-        </div>
+        </main>
 
         <footer>
           <p>Copyright Ⓒ 2019</p>

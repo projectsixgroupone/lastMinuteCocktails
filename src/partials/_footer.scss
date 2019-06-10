@@ -5,7 +5,9 @@ footer {
     text-align: center;
     color: white;
     background-color: #34495e;
-    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 6vh;
 
 }

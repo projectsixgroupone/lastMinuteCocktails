@@ -35,7 +35,60 @@ p {
   font-family: $bodyFont;
 }
 
+// media queries
 
+@media (max-width: 805px) {
+  h1 {
+      font-size: 2rem;
+  }
+  header h2 {
+      font-size: 1.2rem;
+  }
+  .searchContainer {
+    width: 56%;
+  }
+button.favouriteDrinks {
+  width: 203px;
+  left: 0;
+}
+}
+
+@media (max-width: 625px) {
+  h1 {
+      font-size: 1.7rem;
+      text-align: center;
+  }
+ header h2 {
+    display: none;
+ }
+.recipesContainer {
+ justify-content: center;
+
+}
+
+}
+
+@media (max-width: 425px) {
+  h1 {
+      font-size: 1.3rem;
+  }
+input, select, textarea {
+  font-size: 85%;
+
+ }
+.recipesContainer {
+ justify-content: center;
+
+}
+
+.mainButton {
+  padding: 7px 25px;
+  font-size: 85%;
+}
+button.favouriteDrinks {
+font-size: 16px;
+}
+}
 
 
 

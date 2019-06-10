@@ -13,12 +13,17 @@ class App extends Component {
       error: false,
       savedList: {},
       favouriteDrinks: []
+
     }
 
   }
 
 
   // handles the input the user inputs. If the input is valid, it calls the API. If not, it sets an error in state.
+
+
+
+
   handleInput = (drink) =>{
     if(drink) {this.getDrinks(drink)}else{this.setState({
       error:true,
@@ -72,9 +77,6 @@ class App extends Component {
       this.setState({
         drinkRecipes: results.flat()
       })
-      
-
-    
     
   }
 

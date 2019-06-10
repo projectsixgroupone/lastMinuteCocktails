@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Recipe from './Recipe.js';
 import firebase from './firebase';
 
-
+// We now have an array of drinks that include the id "strAlcoholic"
+// We want to target that id for all the drinks,  using either map or for each
+// Push the results of the array, after using a method, to state
+// After a checkbox is clicked in a drop down menu, show the results onto the page.
 
 export default class RecipeList extends Component {
   constructor() {
@@ -69,13 +72,17 @@ export default class RecipeList extends Component {
   }
 
   // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
+// conditional render that shows filtered drinks, if the length is greater than zero show it, but if tehere's nothing then iterate 
+// over, know that it might sho previous filtered drinks remember to clear/reset filtered drinks array, when button is 
 
   render() {
+
     return (
       <div className="recipesContainer wrapper" ref={this.myRef}>
-
+        {/* {this.props.filteredDrinks}.map((drink ) */}
         {this.props.drinkRecipes.map((recipe) => {
           let ingredientArray = this.ingredientList(recipe);
+          // console.log(ingredientArray)
           return (
             <Recipe
               key={recipe.idDrink}

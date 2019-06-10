@@ -69,7 +69,7 @@ export default class Recipe extends Component {
 
     })
     this.props.addRating(this.props.id, ratings)
-    console.log(ratings)
+    // console.log(ratings)
   }
 
 

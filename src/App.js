@@ -14,12 +14,13 @@ import Dropdown from "./Dropdown.js";
 class App extends Component {
   constructor() {
     super();
+    this.myRef = React.createRef();
     this.state = {
       drinkRecipes: [],
       filteredDrinks:[],
       error: false,
       savedList: {},
-      favouriteDrinks: [],
+      favouriteDrinks: []
 
     };
   }
@@ -29,12 +30,12 @@ class App extends Component {
     if (drink) {
       this.getDrinks(drink);
       this.setState({
-        filteredDrinks: [],
+        filteredDrinks: []
       })
     } else {
       this.setState({
         error: true,
-        drinkRecipes: [],
+        drinkRecipes: []
 
       });
     }
@@ -103,19 +104,20 @@ class App extends Component {
       const response = await axios.get(url, {
         dataResponse: "json",
         params: {
-          i: id,
-        },
-      });
-      return response.data.drinks;
-    });
-    const results = await Promise.all(favouriteDrinksRequests);
-    // console.log(results);
+          i: id
+        }
+      })
+      return response.data.drinks
+      })
+      const results = await Promise.all(favouriteDrinksRequests)
+      console.log(results)
 
-    this.setState({
-      drinkRecipes: results.flat(),
-      filteredDrinks: []
-    });
-  };
+      this.setState({
+        drinkRecipes: results.flat(),
+        filteredDrinks: []
+      })
+    
+  }
 
   componentDidMount() {
     const dbref = firebase.database().ref("drinks");
@@ -130,6 +132,15 @@ class App extends Component {
       });
       this.setState({ favouriteDrinks });
     });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.drinkRecipes !== this.state.drinkRecipes) {
+      this.myRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "start"
+      })
+    }
   }
 
   render() {
@@ -153,7 +164,7 @@ class App extends Component {
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         </header>
 
-        <main className="results">
+        <main className="results" ref={this.myRef}>
           {this.state.drinkRecipes.length > 0 ? <Dropdown getFilteredDrinks={this.getFilteredDrinks} />:null}
           <RecipeList
             filteredDrinks={this.state.filteredDrinks}

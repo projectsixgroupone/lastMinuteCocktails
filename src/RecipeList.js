@@ -10,7 +10,7 @@ import firebase from './firebase';
 export default class RecipeList extends Component {
   constructor() {
     super();
-    this.myRef = React.createRef();
+    // this.myRef = React.createRef();
   }
   ingredientList = (recipe) => {
     // Arrays to store the ingredients and coressponding measurements of each drink in results
@@ -62,14 +62,14 @@ export default class RecipeList extends Component {
 
     })
   }
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.drinkRecipes !== this.props.drinkRecipes) {
-      this.myRef.current.scrollIntoView({ 
-        behavior: "smooth", 
-        block: "start"
-      })
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevProps.drinkRecipes !== this.props.drinkRecipes) {
+  //     this.myRef.current.scrollIntoView({ 
+  //       behavior: "smooth", 
+  //       block: "start"
+  //     })
+  //   }
+  // }
 
   // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
 // conditional render that shows filtered drinks, if the length is greater than zero show it, but if tehere's nothing then iterate 

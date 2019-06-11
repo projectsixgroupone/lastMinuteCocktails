@@ -6,6 +6,7 @@ class Form extends Component {
     super();
     this.state = {
       value: '',
+      
 
     }
   }

@@ -18,7 +18,7 @@ handleChange = (e) => {
 
   render() {
     return (
-      <form action="submit">
+      <form className="searchCategories" action="submit">
         <select
           onChange={this.handleChange}
           name="filteredDrinkName"
@@ -29,7 +29,7 @@ handleChange = (e) => {
           <option value="Non alcoholic">Non-Alcoholic</option>
         </select>{" "}
         <button
-          onClick={e => this.props.getFilteredDrinks(e, this.state.choice)}
+          onClick={e => this.props.getFilteredDrinks(e, this.state.choice, this.handleChange)}
         >
           BUTTON
         </button>

@@ -1,11 +1,3 @@
-
-$mainColor: #5705C5;
-$backgroundColor: #E6E0E0;
-$accentColor: #5FD2B9;
-
-
-
-
 .wrapper {
   width: 90%;
   max-width: 1600px;
@@ -37,6 +29,7 @@ $accentColor: #5FD2B9;
   &.expanded {
     flex: 1 1 100%;
     max-width: 100%;
+    position: relative;
   }
 }
 
@@ -95,11 +88,13 @@ $accentColor: #5FD2B9;
   border: none;
   color: $mainColor;
   font-size: 1rem;
-  width: 100%;
   text-align: left;
 
   &.less{
     margin-top: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
   }
 
   &:hover {
@@ -127,6 +122,17 @@ $accentColor: #5FD2B9;
   flex: 0 1 200px;
   margin: 10px;
   }
+  .ratingContainer {
+    display: flex;
+    flex-wrap: wrap;
+      .rating {
+        padding: 0;
+      }
+      .ratingCount {
+        flex: 1 1 100%;
+        padding: 4px;
+      }
+}
   .moreDetails  {
   flex: 1 1 300px;
   }
@@ -155,8 +161,7 @@ $accentColor: #5FD2B9;
     font-family: $bodyFont;
   }
   .noteSection {
-    width: 100%;
-    margin: 10px;
+    margin: 10px 10px 0;
 
     p {
       display: block;
@@ -167,7 +172,7 @@ $accentColor: #5FD2B9;
     }
     button {
       padding: 4px 10px;
-      margin: 10px 0;
+      margin: 10px 0 0;
       color: #fff;
       background: $mainColor;
         &:hover {
@@ -185,26 +190,24 @@ $accentColor: #5FD2B9;
     .noteName {
       font-family: $mainFont;
     }
+    .noteError {
+      background: none;
+      color: $mainColor;
+    }
   }
   textarea {
-    width: 100%;
     resize: none;
+  }
+  input {
+    max-width: 300px;
   }
   input, textarea {
     border: 1px solid $backgroundColor;
+    width: 100%;
     margin: 10px 0;
     padding: 5px;
     border-radius: 0;
   }
-  .noteName {
-
-  }
-}
-
-.noteSection button, 
-.expanded .ratingContainer {
-
-    margin: 20px 0;
 }
 
 
@@ -218,12 +221,7 @@ textarea {
 
 
 
-.ratingContainer {
-    display: flex;
-        .rating {
-            padding: 0;
-        }
-}
+
 
 
 

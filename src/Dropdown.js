@@ -8,6 +8,7 @@ constructor(){
     }
 }
 
+// handle change on user input, filter drinks when the value changes
 handleChange = (e) => {
     this.setState({
         choice: e.target.value

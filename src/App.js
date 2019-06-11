@@ -94,25 +94,30 @@ class App extends Component {
       });
     }
   };
-  // Get filtered drinks from 
+  // Get filtered drinks from filter input
   getFilteredDrinks = (choiceDrink) => {
+    // set the emptu filter state to false by default
     this.setState({
       emptyFilter: false,
     })
+    // if choice is not all filter the array of recipes and only return those that match.
     if (choiceDrink !== `all`) {
       const filteredDrinks = this.state.drinkRecipes.filter(item => {
         // if the user choice "Alcoholic" drinks then we push those items in here
         // else they chose, nonalcoholic
         return item.strAlcoholic === choiceDrink;
       });
+      // if the new array is empty set the emptyfilter state to true. 
       if (filteredDrinks.length === 0) {
         this.setState({
           emptyFilter: true,
         })
       }
+      // if set the filtered drinks to state
       this.setState({
         filteredDrinks: filteredDrinks,
       })
+      // if user selects all set filtered drinks to all drinks.
     } else {
       this.setState({
         filteredDrinks: this.state.drinkRecipes,
@@ -133,9 +138,6 @@ class App extends Component {
       })
       .then(results => {
         results = results.data.drinks;
-
-        // something to hold strAlcholicID
-
         // if there is no result or API calls nothing, show an error. Otherwise save results to state
         if (results) {
           this.setState({
@@ -150,6 +152,7 @@ class App extends Component {
         }
       });
   };
+  // this function asyncronously makes an api call for each favorited drink and saves the results to our drink recipes state.
   getFavouriteDrinks = async () => {
     const url = ` https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`;
     let favouriteDrinks = [...this.state.favouriteDrinks];
@@ -170,7 +173,7 @@ class App extends Component {
         filteredDrinks: []
       })
   }
-
+  // this function asyncronously makes an api call for each user favorited drink and saves the results to our drink recipes state.
   getMyFavouriteDrinks = async () => {
     const url = ` https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
     let myFavouriteDrinks = [...this.state.myFavouriteDrinks]
@@ -190,14 +193,14 @@ class App extends Component {
       drinkRecipes: results.flat()
     })
   }
-
+  // when the app mounts get the favorite drinks from firebase, then check if the user is logged in and save their info to state.
   componentDidMount() {
     const dbref = firebase.database().ref("drinks");
     dbref.on("value", response => {
       let drinks = response.val();
       let favouriteDrinks = [];
       drinks = Object.entries(drinks);
-      drinks.map(drink => {
+      drinks.forEach(drink => {
         if (drink[1].favourite === true) {
           favouriteDrinks.push(drink[0]);
         }
@@ -228,7 +231,7 @@ class App extends Component {
       }
     });
   }
-
+  // when the component updates with new drink recipes scroll the page down to the results.
   componentDidUpdate(prevProps, prevState) {
     if(prevState.drinkRecipes !== this.state.drinkRecipes) {
       this.myRef.current.scrollIntoView({ 
@@ -239,6 +242,7 @@ class App extends Component {
   }
 
   render() {
+  // render all drink recipes by default or just render the filtered ones if that applies, or render no drinks if the filter results in no drinks.
   let drinkRecipes = this.state.drinkRecipes;
   if (this.state.emptyFilter) {
     drinkRecipes = []
@@ -250,7 +254,7 @@ class App extends Component {
         <header>
           <nav>
             <div className="wrapper">
-            {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="favouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
+              {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="favouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
               <div>
                 {this.state.displayName && <p>Welcome, {this.state.displayName}</p>}
                 {this.state.user ? <button className="favouriteDrinks" onClick={this.logout} user={this.state.user}>Log Out</button> : <button className="favouriteDrinks" onClick={this.login}>Log In</button>}

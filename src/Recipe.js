@@ -13,12 +13,10 @@ export default class Recipe extends Component {
       allNotes: [],
       noteError: false,
       expand: false,
-      favourited: false,
-      userFavourited: false
     }
     this.myRef = React.createRef()
   }
-
+  // when the user clicks expand, set it in state and scroll to the box
   onExpand= (event) =>{
     this.setState({
       expand: true
@@ -30,6 +28,8 @@ export default class Recipe extends Component {
       })
     })
   }
+  
+  // when the user clicks shrink, set it in state and scroll to the box
   onShrink= (event) =>{
     this.setState({
       expand: false
@@ -41,22 +41,27 @@ export default class Recipe extends Component {
     })
   }
 
+  // handle change in note box
   onChange = (event) => {
     this.setState({
       note: event.target.value
     })
   }
+
+  // handle change in note name input
   onNameChange = (event) => {
     this.setState({
       noteName: event.target.value
     })
   }
 
+  // submit the note
   onSubmit = (event) => {
     event.preventDefault()
     this.setState({
       noteError: false
     })
+    // if note is valid call the add note function in the parent, otherwise show an error
     if(this.state.note !== '') {
       this.props.addNote(this.props.id, this.state.note, this.state.noteName)
     } else {
@@ -65,9 +70,9 @@ export default class Recipe extends Component {
       })
 
     }
-    // this.props.handlerFromParent(this.state.value)
   }
 
+  // when the user rates a drink push it into the array of ratings in state
   onRating = (event) => {
     const ratings = [...this.state.totalRating];
     ratings.push(parseInt(event.target.value))
@@ -79,25 +84,26 @@ export default class Recipe extends Component {
     })
     this.props.addRating(this.props.id, ratings)
   }
+
+  // handle the rating input
   handleRating = (event) => {
     this.setState({
       rating: parseInt(event.target.value),
     })
   }
 
-
+  
   componentDidMount() {
+    // when the component mounts default the note name input to the user name
     if (this.props.displayName) {
       this.setState({
         noteName: this.props.displayName,
       })
     }
     
-
-    // const dbref = firebase.database().ref();
+    // if the drink doesn't exist in firebase add it with favourite state of false
+    // if it does exist get the notes ratings, and favourite status and save it in state
     const dbref = firebase.database().ref('drinks/' + this.props.id);
-    const dbrefUser = firebase.database().ref('users/');
-
     dbref.on('value', (response) => {
       if (response.val() === null) {
         dbref.update({
@@ -138,8 +144,8 @@ export default class Recipe extends Component {
   }
 
 
-  // Takes each result from the search bar and displays the name, thumbnail and instructions relating to the drink
-  // Favourite button stores the drink based on the drink's property: id
+  
+  // Render shows either and expanded or minimized version of the recipe depending on state.
   render() {
 
     const expandContent = () =>{
@@ -360,7 +366,6 @@ export default class Recipe extends Component {
 
               <p tabIndex="0">{this.props.instructions.length > 125 ? this.props.instructions.substring(0,122)+"..." : this.props.instructions }</p>
 
-                {/* {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>} */}
                 {this.props.favourite ? <button className="favouriteButton unfavourite" onClick={()=> this.props.handleFavourites(this.props.id)}><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={()=> this.props.handleFavourites(this.props.id)}><i className="fas fa-heart"></i></button>}
               
               <button onClick={this.onExpand} className="readMore" aria-label="read more">

@@ -9,7 +9,6 @@
   flex-wrap: wrap;
   justify-content: flex-start;
 
-
 }
 
 .recipeBox {
@@ -132,7 +131,7 @@
         flex: 1 1 100%;
         padding: 4px;
       }
-}
+  }
   .moreDetails  {
   flex: 1 1 300px;
   }
@@ -151,15 +150,17 @@
       margin: 10px;
     }
   }
+
   h2 {
     flex-basis: 100%;
     margin: 0 10px;
   }
+
   ul {
     list-style: none;
-
     font-family: $bodyFont;
   }
+
   .noteSection {
     margin: 10px 10px 0;
 
@@ -176,17 +177,18 @@
       color: #fff;
       background: $mainColor;
         &:hover {
-            background-color: lighten($mainColor, 20)
-    }
+          background-color: lighten($mainColor, 20)
+      }
         &:active{
-            background-color: lighten($mainColor, 20)
-    }
-
-      &:hover{
-        background: darken($mainColor, 10)
+          background-color: lighten($mainColor, 20)
       }
 
-    }
+        &:hover{
+          background: darken($mainColor, 10)
+      }
+
+  }
+
     .noteName {
       font-family: $mainFont;
     }
@@ -209,7 +211,6 @@
     border-radius: 0;
   }
 }
-
 
 textarea {
     overflow: hidden;

@@ -208,6 +208,27 @@ class App extends Component {
       });
       this.setState({ favouriteDrinks });
     });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        let myFavouriteDrinks = [];
+        const dbref = firebase.database().ref(`users/${user.uid}`);
+        // console.log(`THIS IS DBREF: `, dbref);
+        dbref.on('value', (snapshot) => {
+          myFavouriteDrinks = []
+          let favouriteObj = snapshot.val().favouriteDrinks
+          for (let key in favouriteObj) {
+            if (favouriteObj[key].favourite === true) {
+              myFavouriteDrinks.push(key)
+            }
+          }
+          this.setState({
+            user,
+            displayName: user.displayName,
+            myFavouriteDrinks
+          });
+        })
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -229,7 +250,9 @@ class App extends Component {
         <header>
           <nav>
             <div className="wrapper">
-              <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
+            {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="myFavouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
+            {this.state.displayName && <p>Welcome, {this.state.displayName}</p>}
+            {this.state.user ? <button onClick={this.logout} user={this.state.user}>Log Out</button> : <button onClick={this.login}>Log In</button>}
             </div>
           </nav>
           <div className="wrapper">
@@ -238,13 +261,7 @@ class App extends Component {
           </div>
 
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
-          <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
 
-          {/* LOGIN/LOGOUT BUTTONS */}
-
-          {this.state.user ? <button onClick={this.logout} user={this.state.user}>Log Out</button> : <button onClick={this.login}>Log In</button>}
-          {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="myFavouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button></button>}
-          {this.state.displayName ? <h3>Welcome, {this.state.displayName}</h3> : <h3></h3>}
         </header>
 
         <main className="results" ref={this.myRef}>

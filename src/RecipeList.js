@@ -125,7 +125,13 @@ export default class RecipeList extends Component {
         {/* {this.props.filteredDrinks}.map((drink ) */}
         {this.props.drinkRecipes.map((recipe) => {
           let ingredientArray = this.ingredientList(recipe);
-          // console.log(ingredientArray)
+          let favourite = false;
+          const myExistingFavourites = [...this.props.myFavouriteDrinks]
+          const existingFavourites = [...this.props.favouriteDrinks]
+          if ((this.props.user && myExistingFavourites.indexOf(recipe.idDrink) > -1) || (!this.props.user && existingFavourites.indexOf(recipe.idDrink) > -1 )) {
+            favourite = true
+          } 
+          
           return (
             <Recipe
               key={recipe.idDrink}
@@ -133,10 +139,11 @@ export default class RecipeList extends Component {
               thumbnail={recipe.strDrinkThumb}
               ingredients={ingredientArray}
               instructions={recipe.strInstructions}
-              favouriteDrink={this.favouriteDrink}
-              unfavouriteDrink={this.unfavouriteDrink}
-              userFavouriteDrink={this.userFavouriteDrink}
-              userUnfavouriteDrink={this.userUnfavouriteDrink}
+              favourite={favourite}
+              // favouriteDrink={this.favouriteDrink}
+              // unfavouriteDrink={this.unfavouriteDrink}
+              // userFavouriteDrink={this.userFavouriteDrink}
+              // userUnfavouriteDrink={this.userUnfavouriteDrink}
               addNote={this.addNote}
               id={recipe.idDrink}
               addRating={this.addRating}

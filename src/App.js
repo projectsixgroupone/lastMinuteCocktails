@@ -41,8 +41,7 @@ class App extends Component {
     }
   };
  
-  getFilteredDrinks = (event, choiceDrink) => {
-    event.preventDefault();
+  getFilteredDrinks = (choiceDrink) => {
     if (choiceDrink !== `All`) {
       const filteredDrinks = this.state.drinkRecipes.filter(item => {
         // if the user choice "Alcoholic" drinks then we push those items in here
@@ -61,10 +60,10 @@ class App extends Component {
   };
    
 
-  narrowItDown = filteredDrinkName => {
-    const copyOfDrinkRecipes = Array.from(this.state.drinkRecipes);
-    console.log(copyOfDrinkRecipes);
-  };
+  // narrowItDown = filteredDrinkName => {
+  //   const copyOfDrinkRecipes = Array.from(this.state.drinkRecipes);
+  //   console.log(copyOfDrinkRecipes);
+  // };
 
   // API call takes user input as a query
   getDrinks = drink => {

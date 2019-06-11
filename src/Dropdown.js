@@ -4,7 +4,7 @@ class Dropdown extends Component {
 constructor(){
     super();
     this.state={
-        choice:'',
+        choice: ''
     }
 }
 
@@ -13,26 +13,46 @@ handleChange = (e) => {
     this.setState({
         choice: e.target.value
     })
+    this.props.getFilteredDrinks(e.target.value)
 }
 
+  // onChange = { this.handleChange }
 
   render() {
     return (
-      <form className="searchCategories" action="submit">
-        <select
-          onChange={this.handleChange}
-          name="filteredDrinkName"
-          id="strAlcoholic"
-        >
-          <option value="All">All Drinks</option>
-          <option value="Alcoholic">Alcoholic</option>
-          <option value="Non alcoholic">Non-Alcoholic</option>
-        </select>{" "}
-        <button
-          onClick={e => this.props.getFilteredDrinks(e, this.state.choice, this.handleChange)}
-        >
-          BUTTON
-        </button>
+    
+        <form class="searchCategories">
+          <div className="categoriesContainer wrapper">
+     
+                <p><i class="fas fa-filter"></i>Filter By:</p>
+     
+            <input onChange={this.handleChange}
+              type="radio"
+              id="all"
+              name="filteredDrinkName"
+              value="all"
+              // aria-hidden="true"
+            />
+            <label htmlFor="all">All</label>
+
+            <input onChange={this.handleChange}
+              type="radio"
+              id="alcoholic"
+              name="filteredDrinkName"
+              value="Alcoholic"
+              // aria-hidden="true"
+            />
+            <label htmlFor="alcoholic">Alcoholic</label>
+
+            <input onChange={this.handleChange}
+              type="radio"
+              id="Non alcoholic"
+              name="filteredDrinkName"
+              value="Non alcoholic"
+              // aria-hidden="true"
+            />
+            <label htmlFor="Non alcoholic">Non-Alcoholic</label>
+          </div>
       </form>
     );
   }

@@ -28,6 +28,7 @@
 
 .categoriesContainer {
     display: flex;
+    flex-wrap: wrap;
      justify-content: flex-end;
 }
 
@@ -38,6 +39,7 @@
     line-height: 1.5;
     font-size: 1rem;
     margin-left: 30px;
+    margin-right: 20px;
         &:hover {
             border-bottom: 1px solid $mainColor;
         }
@@ -50,7 +52,33 @@
 }
 
 
+@media (max-width: 620px) {
+    .searchCategories {
+     align-items: center;
+     justify-content: center;
+    
+    
+        label {
+         
+            padding-bottom: 5px;
+            margin: 0;
+            
+           
+        }
+    }
 
+    .categoriesContainer {
+        flex-direction: column;
+        width: 50%;
+        margin: 0;
 
+    }
+
+    .fas.fa-filter {
+        display: none;
+      
+}
+
+}
 
 

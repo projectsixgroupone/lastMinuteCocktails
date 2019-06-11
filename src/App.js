@@ -20,7 +20,7 @@ class App extends Component {
       filteredDrinks:[],
       error: false,
       savedList: {},
-      favouriteDrinks: [],
+      favouriteDrinks: []
 
     };
   }
@@ -30,12 +30,12 @@ class App extends Component {
     if (drink) {
       this.getDrinks(drink);
       this.setState({
-        filteredDrinks: [],
+        filteredDrinks: []
       })
     } else {
       this.setState({
         error: true,
-        drinkRecipes: [],
+        drinkRecipes: []
 
       });
     }
@@ -104,19 +104,20 @@ class App extends Component {
       const response = await axios.get(url, {
         dataResponse: "json",
         params: {
-          i: id,
-        },
-      });
-      return response.data.drinks;
-    });
-    const results = await Promise.all(favouriteDrinksRequests);
-    // console.log(results);
+          i: id
+        }
+      })
+      return response.data.drinks
+      })
+      const results = await Promise.all(favouriteDrinksRequests)
+      console.log(results)
 
-    this.setState({
-      drinkRecipes: results.flat(),
-      filteredDrinks: []
-    });
-  };
+      this.setState({
+        drinkRecipes: results.flat(),
+        filteredDrinks: []
+      })
+    
+  }
 
   componentDidMount() {
     const dbref = firebase.database().ref("drinks");

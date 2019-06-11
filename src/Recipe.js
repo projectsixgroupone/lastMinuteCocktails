@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import firebase from './firebase.js';
-import { all } from 'q';
-
-
 
 export default class Recipe extends Component {
   constructor() {
@@ -15,7 +12,8 @@ export default class Recipe extends Component {
       averageRating: null,
       allNotes: [],
       expand: false,
-      favourited: false
+      favourited: false,
+      userFavourited: false
     }
     this.myRef = React.createRef()
   }
@@ -69,7 +67,7 @@ export default class Recipe extends Component {
 
     })
     this.props.addRating(this.props.id, ratings)
-    console.log(ratings)
+    // console.log(ratings)
   }
 
 
@@ -77,6 +75,7 @@ export default class Recipe extends Component {
 
     // const dbref = firebase.database().ref();
     const dbref = firebase.database().ref('drinks/' + this.props.id);
+    const dbrefUser = firebase.database().ref('users/');
 
     dbref.on('value', (response) => {
       // console.log(response.val() );
@@ -91,8 +90,8 @@ export default class Recipe extends Component {
           for (let key in notes) {
             newNotes.push({note: notes[key].note, name: notes[key].name})
           }
-          console.log(notes);
-          console.log(newNotes);
+          // console.log(notes);
+          // console.log(newNotes);
           this.setState({
             allNotes: newNotes,
           })
@@ -204,7 +203,9 @@ export default class Recipe extends Component {
               <button onClick={this.onShrink} className="readMore less">
                 Show Less
               </button>
-              {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)} tabIndex="0" aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} tabIndex="0" aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
+
+              <button className="favouriteButton" onClick={this.handleFavourites}><i className="fas fa-heart"></i></button>
+
             </div>
 
             
@@ -323,13 +324,12 @@ export default class Recipe extends Component {
                       title="Bad"
                       aria-hidden="true"
                     />
-                    {/* <span>{this.state.averageRating}</span> */}
-
                   </div>
 
               <p tabIndex="0">{this.props.instructions.length > 125 ? this.props.instructions.substring(0,122)+"..." : this.props.instructions }</p>
-                {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>}
-            
+
+                {/* {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>} */}
+              <button className="favouriteButton" onClick={() => this.props.handleFavourites(this.props.id)}><i className="fas fa-heart"></i></button>
               
               <button onClick={this.onExpand} className="readMore" aria-label="read more">
                 Read More

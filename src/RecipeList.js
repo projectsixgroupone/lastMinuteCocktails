@@ -40,6 +40,47 @@ export default class RecipeList extends Component {
       favourite: false
     })
   }
+
+
+  handleFavourites = (id) => {
+    let currentDrink = null;
+    this.props.drinkRecipes.forEach(recipe => {
+      if (recipe.idDrink === id) {
+        currentDrink = recipe;
+      }
+    });
+    console.log(currentDrink);
+
+    // IF USER: RUN THIS  || IF NO USER: PUSH TO GENERAL
+    if (this.props.user) {
+      const dbref = firebase.database().ref(`users/${this.props.user.uid}/favouriteDrinks/${id}`);
+      console.log(dbref);
+      
+      const myExistingFavourites = [...this.props.myFavouriteDrinks]
+      if (myExistingFavourites.indexOf(id) > -1) {
+        dbref.update({
+          favourite: false
+        })
+      } else {
+        dbref.update({
+          favourite: true
+        })
+      }
+    
+      
+      
+    } else {
+      const existingFavourites = [...this.props.favouriteDrinks]
+      if (existingFavourites.indexOf(id) > -1) {
+        this.unfavouriteDrink(id);
+      } else {
+        this.favouriteDrink(id);
+      }
+    }
+    
+
+  }
+
   addNote = (drinkId, note, name) => {
     const dbref = firebase.database().ref('drinks/' + drinkId + '/notes');
     dbref.push({ note, name })
@@ -53,11 +94,13 @@ export default class RecipeList extends Component {
 
   // When a value is updated, retrieves the information from firebase
   componentDidMount() {
-    const dbref = firebase.database().ref();
-    dbref.on('value', (response) => {
-      // console.log(response.val());
+    if (this.props.user) {
+      const dbref = firebase.database().ref(`users/${this.props.user.uid}/favouriteDrinks/`);
+      dbref.on('value', response => {
+        console.log(response.val())
 
-    })
+      })
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.drinkRecipes !== this.props.drinkRecipes) {
@@ -67,6 +110,7 @@ export default class RecipeList extends Component {
       })
     }
   }
+  
 
   // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
 
@@ -85,10 +129,12 @@ export default class RecipeList extends Component {
               instructions={recipe.strInstructions}
               favouriteDrink={this.favouriteDrink}
               unfavouriteDrink={this.unfavouriteDrink}
+              userFavouriteDrink={this.userFavouriteDrink}
+              userUnfavouriteDrink={this.userUnfavouriteDrink}
               addNote={this.addNote}
               id={recipe.idDrink}
               addRating={this.addRating}
-
+              handleFavourites={this.handleFavourites}
             />
 
           )

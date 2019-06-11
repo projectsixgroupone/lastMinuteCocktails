@@ -1,90 +1,91 @@
 .searchCategories {
-   font-size: 13px;
-    padding: 10px 8px 10px 14px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-   
- 
-        p {
-            color: $mainColor;
-            font-size: 1rem;
-            
-        } 
+  font-size: 13px;
+  padding: 10px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
-        input:checked+label {
-            color: $accentColor;
-        }
+  p {
+    color: $mainColor;
+    font-size: 1rem;
+      
+  } 
+
+  input:checked+label {
+    color: $accentColor;
+  }
     
 }
 
 .fas.fa-filter {
-    margin-right: 20px;
-    background-color: $mainColor;
-    color: white;
-    padding: 6px;
-    border-radius: 50px;
-    font-size: 15px;
+  margin-right: 20px;
+  background-color: $mainColor;
+  color: white;
+  padding: 6px;
+  border-radius: 50px;
+  font-size: 15px;
 
 
 
 }
 
 .categoriesContainer {
-    display: flex;
-    flex-wrap: wrap;
-     justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 
 .searchCategories label {
-    font-family: $bodyFont;
-    color: $mainColor;
-    line-height: 1.5;
-    font-size: 1rem;
-    margin-left: 30px;
-    margin-right: 20px;
-        &:hover {
-            border-bottom: 1px solid $mainColor;
-        }
-}
+  font-family: $bodyFont;
+  color: $mainColor;
+  line-height: 1.5;
+  font-size: 1rem;
+  padding-bottom: 3px;
+  margin-left: 20px;
+  margin-right: 20px;
+    &:hover {
+      border-bottom: 1px solid $accentColor;
+      padding-bottom: 2px;
+    }
+  }
 
 #all, 
 #alcoholic, 
 #Non\ alcoholic {
-    display: none;
+  display: none;
 }
 
 
 @media (max-width: 620px) {
-    .searchCategories {
-     align-items: center;
-     justify-content: center;
-    
-    
-        label {
-         
-            padding-bottom: 5px;
-            margin: 0;
-            
-           
-        }
-    }
+  .searchCategories {
+    align-items: center;
+    justify-content: center;
 
-    .categoriesContainer {
-        flex-direction: column;
-        width: 50%;
-        margin: 0;
-
-    }
-
-    .fas.fa-filter {
-        display: none;
+    label { 
+      padding-bottom: 3px;
+      margin: 0;
+      text-align: center;
       
-}
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+  .categoriesContainer {
+    flex-direction: column;
+    width: 50%;
+    margin: 0;
+
+  }
+
+  .fas.fa-filter {
+    display: none;
+    
+  }
 
 }
 

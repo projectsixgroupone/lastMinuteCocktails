@@ -249,9 +249,11 @@ class App extends Component {
         <header>
           <nav>
             <div className="wrapper">
-            {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="myFavouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
-            {this.state.displayName && <p>Welcome, {this.state.displayName}</p>}
-            {this.state.user ? <button onClick={this.logout} user={this.state.user}>Log Out</button> : <button onClick={this.login}>Log In</button>}
+            {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="favouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
+              <div>
+                {this.state.displayName && <p>Welcome, {this.state.displayName}</p>}
+                {this.state.user ? <button className="favouriteDrinks" onClick={this.logout} user={this.state.user}>Log Out</button> : <button className="favouriteDrinks" onClick={this.login}>Log In</button>}
+              </div>  
             </div>
           </nav>
           <div className="wrapper">

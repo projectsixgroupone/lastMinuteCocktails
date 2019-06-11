@@ -14,6 +14,7 @@ import Dropdown from "./Dropdown.js";
 class App extends Component {
   constructor() {
     super();
+    this.myRef = React.createRef();
     this.state = {
       drinkRecipes: [],
       filteredDrinks:[],
@@ -132,6 +133,15 @@ class App extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.drinkRecipes !== this.state.drinkRecipes) {
+      this.myRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "start"
+      })
+    }
+  }
+
   render() {
   let drinkRecipes = this.state.drinkRecipes;
   if (this.state.filteredDrinks.length > 0){
@@ -153,7 +163,7 @@ class App extends Component {
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
         </header>
 
-        <main className="results">
+        <main className="results" ref={this.myRef}>
           {this.state.drinkRecipes.length > 0 ? <Dropdown getFilteredDrinks={this.getFilteredDrinks} />:null}
           <RecipeList
             filteredDrinks={this.state.filteredDrinks}

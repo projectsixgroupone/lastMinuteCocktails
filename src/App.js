@@ -273,7 +273,8 @@ class App extends Component {
           <RecipeList
             filteredDrinks={this.state.filteredDrinks}
             drinkRecipes={drinkRecipes}
-            user={this.state.user} 
+            user={this.state.user}
+            displayName={this.state.displayName} 
             myFavouriteDrinks={this.state.myFavouriteDrinks} 
             favouriteDrinks={this.state.favouriteDrinks}
           />

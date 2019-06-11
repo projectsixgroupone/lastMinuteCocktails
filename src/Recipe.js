@@ -69,20 +69,28 @@ export default class Recipe extends Component {
   }
 
   onRating = (event) => {
-    const ratings = this.state.totalRating;
+    const ratings = [...this.state.totalRating];
     ratings.push(parseInt(event.target.value))
 
     this.setState({
-      rating: event.target.value,
+      rating: parseInt(event.target.value),
       totalRating: ratings
 
     })
     this.props.addRating(this.props.id, ratings)
     // console.log(ratings)
   }
+  handleRating = (event) => {
+    this.setState({
+      rating: parseInt(event.target.value),
+    })
+  }
 
 
   componentDidMount() {
+    this.setState({
+      noteName: this.props.displayName,
+    })
 
     // const dbref = firebase.database().ref();
     const dbref = firebase.database().ref('drinks/' + this.props.id);
@@ -144,11 +152,12 @@ export default class Recipe extends Component {
 
               <div className="ratingContainer">
                 <div className="rating">
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starFive' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 5}
+                    checked={this.state.averageRating === 5}
                     value="5"
                   />
                   <label
@@ -157,11 +166,12 @@ export default class Recipe extends Component {
                     title="Awesome"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starFour' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 4}
+                    checked={this.state.averageRating === 4}
                     value="4"
                   />
                   <label
@@ -170,11 +180,12 @@ export default class Recipe extends Component {
                     title="Great"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starThree' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 3}
+                    checked={this.state.averageRating === 3}
                     value="3"
                   />
                   <label
@@ -183,11 +194,12 @@ export default class Recipe extends Component {
                     title="Very good"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starTwo' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 2}
+                    checked={this.state.averageRating === 2}
                     value="2"
                   />
                   <label
@@ -196,11 +208,12 @@ export default class Recipe extends Component {
                     title="Good"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starOne' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 1}
+                    checked={this.state.averageRating === 1}
                     value="1"
                   />
                   <label
@@ -251,7 +264,8 @@ export default class Recipe extends Component {
                   })}
                 </div>
                 <form action="submit" onSubmit={this.onSubmit}>
-                  <input type="text" onChange={this.onNameChange} placeholder="Name"/>
+                  <input type="text" onChange={this.onNameChange} placeholder="Name"
+                  value={this.state.noteName} />
                   <textarea onChange={this.onChange} placeholder="Enter your note..." tabIndex="0" aria-label="Enter Your Note Here"/>
                   <div>{this.state.noteError ? <p className="noteError">Did you forget to add your comment?</p> :  null }</div>
                   <button className="addNote">Add Note</button>
@@ -273,11 +287,12 @@ export default class Recipe extends Component {
               <h2 aria-label={this.props.name}>{this.props.name}</h2>
 
                   <div className="rating">
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starFive' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 5}
+                      checked={this.state.averageRating === 5}
                       value="5"
                     />
                     <label
@@ -286,11 +301,12 @@ export default class Recipe extends Component {
                       title="Awesome"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starFour' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 4}
+                      checked={this.state.averageRating === 4}
                       value="4"
                     />
                     <label
@@ -299,11 +315,12 @@ export default class Recipe extends Component {
                       title="Great"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starThree' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 3}
+                      checked={this.state.averageRating === 3}
                       value="3"
                     />
                     <label
@@ -312,11 +329,12 @@ export default class Recipe extends Component {
                       title="Very good"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starTwo' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 2}
+                      checked={this.state.averageRating === 2}
                       value="2"
                     />
                     <label
@@ -325,11 +343,12 @@ export default class Recipe extends Component {
                       title="Good"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starOne' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 1}
+                      checked={this.state.averageRating === 1}
                       value="1"
                     />
                     <label

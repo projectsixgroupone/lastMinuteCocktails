@@ -140,6 +140,7 @@ export default class RecipeList extends Component {
               ingredients={ingredientArray}
               instructions={recipe.strInstructions}
               favourite={favourite}
+              displayName={this.props.displayName}
               // favouriteDrink={this.favouriteDrink}
               // unfavouriteDrink={this.unfavouriteDrink}
               // userFavouriteDrink={this.userFavouriteDrink}

@@ -11,6 +11,10 @@ import Dropdown from "./Dropdown.js";
 // once creating getfilteredDrinks we had to pass event and filteredDrinkName
 // create a function where we create new arrays "narrowitDown"
 // 
+
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
+
 class App extends Component {
   constructor() {
     super();
@@ -20,9 +24,61 @@ class App extends Component {
       filteredDrinks:[],
       error: false,
       savedList: {},
-      favouriteDrinks: []
+      favouriteDrinks: [],
+      user: null,
+      displayName: null,
+      myFavouriteDrinks: [],
+      myDrinkRecipes: []
+    }
+  }
 
-    };
+  login = () => {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        const displayName = user.displayName;
+        let myFavouriteDrinks = [];
+        const dbref = firebase.database().ref(`users/${user.uid}`);
+        // console.log(`THIS IS DBREF: `, dbref);
+        dbref.on('value', (snapshot) => {
+          myFavouriteDrinks = []
+          // console.log(`this is snapshot: `, snapshot.val());
+          if (snapshot.val() === null) {
+            dbref.set({
+              userid: user.uid,
+              displayName: displayName,
+
+            });
+            // console.log(user);
+            // console.log(displayName);
+          } else { 
+            let favouriteObj = snapshot.val().favouriteDrinks
+            console.log(favouriteObj)
+            for (let key in favouriteObj) {
+              console.log(favouriteObj[key])
+              if (favouriteObj[key].favourite === true) {
+                myFavouriteDrinks.push(key)
+                console.log(myFavouriteDrinks)
+              }
+            }
+          }
+          this.setState({
+            user,
+            displayName,
+            myFavouriteDrinks
+          });
+        })
+      });
+  }
+
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null,
+          displayName: null
+        });
+      });
   }
 
   // handles the input the user inputs. If the input is valid, it calls the API. If not, it sets an error in state.
@@ -109,13 +165,33 @@ class App extends Component {
       return response.data.drinks
       })
       const results = await Promise.all(favouriteDrinksRequests)
-      console.log(results)
+      // console.log(results)
 
       this.setState({
         drinkRecipes: results.flat(),
         filteredDrinks: []
       })
-    
+  }
+
+  getMyFavouriteDrinks = async () => {
+    const url = ` https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007`
+    let myFavouriteDrinks = [...this.state.myFavouriteDrinks]
+
+    let myFavouriteDrinksRequests = myFavouriteDrinks.map(async id => {
+      const response = await axios.get(url, {
+        dataResponse: 'json',
+        params: {
+          i: id
+        }
+      })
+      return response.data.drinks
+    })
+    const results = await Promise.all(myFavouriteDrinksRequests)
+    console.log(results)
+
+    this.setState({
+      drinkRecipes: results.flat()
+    })
   }
 
   componentDidMount() {
@@ -130,6 +206,27 @@ class App extends Component {
         }
       });
       this.setState({ favouriteDrinks });
+    });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        let myFavouriteDrinks = [];
+        const dbref = firebase.database().ref(`users/${user.uid}`);
+        // console.log(`THIS IS DBREF: `, dbref);
+        dbref.on('value', (snapshot) => {
+          myFavouriteDrinks = []
+          let favouriteObj = snapshot.val().favouriteDrinks
+          for (let key in favouriteObj) {
+            if (favouriteObj[key].favourite === true) {
+              myFavouriteDrinks.push(key)
+            }
+          }
+          this.setState({
+            user,
+            displayName: user.displayName,
+            myFavouriteDrinks
+          });
+        })
+      }
     });
   }
 
@@ -152,7 +249,11 @@ class App extends Component {
         <header>
           <nav>
             <div className="wrapper">
-              <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>
+            {this.state.user ? <button onClick={this.getMyFavouriteDrinks} className="favouriteDrinks" aria-label="My Favourite Drinks" >My Favourite Drinks</button> : <button onClick={this.getFavouriteDrinks} className="favouriteDrinks" aria-label="Favourite Drinks">Favourite Drinks</button>}
+              <div>
+                {this.state.displayName && <p>Welcome, {this.state.displayName}</p>}
+                {this.state.user ? <button className="favouriteDrinks" onClick={this.logout} user={this.state.user}>Log Out</button> : <button className="favouriteDrinks" onClick={this.login}>Log In</button>}
+              </div>  
             </div>
           </nav>
           <div className="wrapper">
@@ -161,6 +262,7 @@ class App extends Component {
           </div>
 
           <Form error={this.state.error} handlerFromParent={this.handleInput}/>
+
         </header>
 
         <main className="results" ref={this.myRef}>
@@ -168,6 +270,9 @@ class App extends Component {
           <RecipeList
             filteredDrinks={this.state.filteredDrinks}
             drinkRecipes={drinkRecipes}
+            user={this.state.user} 
+            myFavouriteDrinks={this.state.myFavouriteDrinks} 
+            favouriteDrinks={this.state.favouriteDrinks}
           />
         </main>
 

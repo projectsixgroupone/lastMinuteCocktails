@@ -23,7 +23,9 @@ handleChange = (e) => {
     
         <form class="searchCategories">
           <div className="categoriesContainer wrapper">
-            <p><i class="fas fa-filter"></i>Filter By:</p>
+     
+                <p><i class="fas fa-filter"></i>Filter By:</p>
+     
             <input onChange={this.handleChange}
               type="radio"
               id="all"

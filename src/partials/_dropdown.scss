@@ -5,15 +5,52 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     overflow: hidden;
-    position: relative;
-    border: none;
-    background:none;
+    display: flex;
+     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+   
+ 
+        p {
+            color: $mainColor;
+            font-size: 1rem;
+            
+        } 
+
+        input:checked+label {
+            color: $accentColor;
+        }
     
 }
 
-select {
-     border: none;
-    background:none;
+.fas.fa-filter {
+    margin-right: 20px;
+
 }
+
+.categoriesContainer {
+    display: flex;
+     justify-content: flex-end;
+}
+
+
+.searchCategories label {
+    font-family: $bodyFont;
+    color: $mainColor;
+    line-height: 1.5;
+    font-size: 1rem;
+    margin-left: 30px;
+        &:hover {
+            border-bottom: 1px solid $mainColor;
+        }
+}
+
+#all, 
+#alcoholic, 
+#Non\ alcoholic {
+    display: none;
+}
+
+
+
+
 
 

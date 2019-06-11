@@ -213,18 +213,21 @@ class App extends Component {
         const dbref = firebase.database().ref(`users/${user.uid}`);
         // console.log(`THIS IS DBREF: `, dbref);
         dbref.on('value', (snapshot) => {
-          myFavouriteDrinks = []
-          let favouriteObj = snapshot.val().favouriteDrinks
-          for (let key in favouriteObj) {
-            if (favouriteObj[key].favourite === true) {
-              myFavouriteDrinks.push(key)
+          if (snapshot.val() !== null) {
+            myFavouriteDrinks = []
+            let favouriteObj = snapshot.val().favouriteDrinks
+            for (let key in favouriteObj) {
+              if (favouriteObj[key].favourite === true) {
+                myFavouriteDrinks.push(key)
+              }
             }
+            this.setState({
+              user,
+              displayName: user.displayName,
+              myFavouriteDrinks
+            });
           }
-          this.setState({
-            user,
-            displayName: user.displayName,
-            myFavouriteDrinks
-          });
+          
         })
       }
     });

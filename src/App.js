@@ -5,13 +5,8 @@ import Form from './Form.js'
 import axios from 'axios'
 import RecipeList from './RecipeList.js';
 import Dropdown from "./Dropdown.js";
-// create the Dropdown component that holds the dropdown and onclick/change events
-// create onChange on the select, and onClick on the button
-// created a function "getFiltereddrinks" that will be fired once the button is clicked
-// once creating getfilteredDrinks we had to pass event and filteredDrinkName
-// create a function where we create new arrays "narrowitDown"
-// 
 
+// setup firebase auth
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -28,40 +23,42 @@ class App extends Component {
       user: null,
       displayName: null,
       myFavouriteDrinks: [],
-      myDrinkRecipes: []
+      myDrinkRecipes: [],
+      emptyFilter: false
     }
   }
 
+  // On login click connect to firebase
   login = () => {
     auth.signInWithPopup(provider)
       .then((result) => {
+
+        // save the result and firebase reference to variables
         const user = result.user;
         const displayName = user.displayName;
         let myFavouriteDrinks = [];
         const dbref = firebase.database().ref(`users/${user.uid}`);
-        // console.log(`THIS IS DBREF: `, dbref);
+
+        // get a snapshot of the database
         dbref.on('value', (snapshot) => {
           myFavouriteDrinks = []
-          // console.log(`this is snapshot: `, snapshot.val());
+          // if the use doesn't exist in firebase, add them
           if (snapshot.val() === null) {
             dbref.set({
               userid: user.uid,
               displayName: displayName,
 
             });
-            // console.log(user);
-            // console.log(displayName);
+            // otherwise get the values of the user's favorited drinks
           } else { 
             let favouriteObj = snapshot.val().favouriteDrinks
-            console.log(favouriteObj)
             for (let key in favouriteObj) {
-              console.log(favouriteObj[key])
               if (favouriteObj[key].favourite === true) {
                 myFavouriteDrinks.push(key)
-                console.log(myFavouriteDrinks)
               }
             }
           }
+          // save the user, name, and favourited drinks to state
           this.setState({
             user,
             displayName,
@@ -70,7 +67,7 @@ class App extends Component {
         })
       });
   }
-
+  // on logout click, log the user out
   logout = () => {
     auth.signOut()
       .then(() => {
@@ -81,12 +78,13 @@ class App extends Component {
       });
   }
 
-  // handles the input the user inputs. If the input is valid, it calls the API. If not, it sets an error in state.
+  // handles the user input on the main search bar. If the input is valid, it calls the API. If not, it sets an error in state.
   handleInput = drink => {
     if (drink) {
       this.getDrinks(drink);
       this.setState({
-        filteredDrinks: []
+        filteredDrinks: [],
+        emptyFilter: false
       })
     } else {
       this.setState({
@@ -96,35 +94,36 @@ class App extends Component {
       });
     }
   };
- 
+  // Get filtered drinks from 
   getFilteredDrinks = (choiceDrink) => {
-    if (choiceDrink !== `All`) {
+    this.setState({
+      emptyFilter: false,
+    })
+    if (choiceDrink !== `all`) {
       const filteredDrinks = this.state.drinkRecipes.filter(item => {
         // if the user choice "Alcoholic" drinks then we push those items in here
         // else they chose, nonalcoholic
         return item.strAlcoholic === choiceDrink;
       });
-      console.log(filteredDrinks);
+      if (filteredDrinks.length === 0) {
+        this.setState({
+          emptyFilter: true,
+        })
+      }
       this.setState({
         filteredDrinks: filteredDrinks,
       })
     } else {
       this.setState({
-        filteredDrinks: [],
+        filteredDrinks: this.state.drinkRecipes,
+        emptyFilter: false
       })
     }
   };
-   
-
-  // narrowItDown = filteredDrinkName => {
-  //   const copyOfDrinkRecipes = Array.from(this.state.drinkRecipes);
-  //   console.log(copyOfDrinkRecipes);
-  // };
-
+  
   // API call takes user input as a query
   getDrinks = drink => {
     const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php";
-    // console.log(drink)
     axios
       .get(url, {
         dataResponse: "json",
@@ -165,7 +164,6 @@ class App extends Component {
       return response.data.drinks
       })
       const results = await Promise.all(favouriteDrinksRequests)
-      // console.log(results)
 
       this.setState({
         drinkRecipes: results.flat(),
@@ -187,7 +185,6 @@ class App extends Component {
       return response.data.drinks
     })
     const results = await Promise.all(myFavouriteDrinksRequests)
-    console.log(results)
 
     this.setState({
       drinkRecipes: results.flat()
@@ -211,7 +208,6 @@ class App extends Component {
       if (user) {
         let myFavouriteDrinks = [];
         const dbref = firebase.database().ref(`users/${user.uid}`);
-        // console.log(`THIS IS DBREF: `, dbref);
         dbref.on('value', (snapshot) => {
           if (snapshot.val() !== null) {
             myFavouriteDrinks = []
@@ -244,7 +240,9 @@ class App extends Component {
 
   render() {
   let drinkRecipes = this.state.drinkRecipes;
-  if (this.state.filteredDrinks.length > 0){
+  if (this.state.emptyFilter) {
+    drinkRecipes = []
+  } else if (this.state.filteredDrinks.length > 0){
     drinkRecipes = this.state.filteredDrinks;
   }
     return (

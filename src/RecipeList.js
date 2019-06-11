@@ -52,12 +52,9 @@ export default class RecipeList extends Component {
         currentDrink = recipe;
       }
     });
-    console.log(currentDrink);
-
     // IF USER: RUN THIS  || IF NO USER: PUSH TO GENERAL
     if (this.props.user) {
       const dbref = firebase.database().ref(`users/${this.props.user.uid}/favouriteDrinks/${id}`);
-      console.log(dbref);
       
       const myExistingFavourites = [...this.props.myFavouriteDrinks]
       if (myExistingFavourites.indexOf(id) > -1) {
@@ -94,30 +91,7 @@ export default class RecipeList extends Component {
     dbref.update({ rating })
   }
 
-
-  // When a value is updated, retrieves the information from firebase
-  componentDidMount() {
-    if (this.props.user) {
-      const dbref = firebase.database().ref(`users/${this.props.user.uid}/favouriteDrinks/`);
-      dbref.on('value', response => {
-        console.log(response.val())
-
-      })
-    }
-  }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.drinkRecipes !== this.props.drinkRecipes) {
-  //     this.myRef.current.scrollIntoView({ 
-  //       behavior: "smooth", 
-  //       block: "start"
-  //     })
-  //   }
-  // }
-
-  // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array
-// conditional render that shows filtered drinks, if the length is greater than zero show it, but if tehere's nothing then iterate 
-// over, know that it might sho previous filtered drinks remember to clear/reset filtered drinks array, when button is 
-
+  // render method maps through the array of drink recipes and creates recipe component with each of the properties in the array conditional render that shows filtered drinks, if the length is greater than zero show it, but if tehere's nothing then iterate over
   render() {
 
     return (

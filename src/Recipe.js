@@ -78,7 +78,6 @@ export default class Recipe extends Component {
 
     })
     this.props.addRating(this.props.id, ratings)
-    // console.log(ratings)
   }
   handleRating = (event) => {
     this.setState({
@@ -88,16 +87,18 @@ export default class Recipe extends Component {
 
 
   componentDidMount() {
-    this.setState({
-      noteName: this.props.displayName,
-    })
+    if (this.props.displayName) {
+      this.setState({
+        noteName: this.props.displayName,
+      })
+    }
+    
 
     // const dbref = firebase.database().ref();
     const dbref = firebase.database().ref('drinks/' + this.props.id);
     const dbrefUser = firebase.database().ref('users/');
 
     dbref.on('value', (response) => {
-      // console.log(response.val() );
       if (response.val() === null) {
         dbref.update({
           favourite: false
@@ -109,8 +110,6 @@ export default class Recipe extends Component {
           for (let key in notes) {
             newNotes.push({note: notes[key].note, name: notes[key].name})
           }
-          // console.log(notes);
-          // console.log(newNotes);
           this.setState({
             allNotes: newNotes,
           })

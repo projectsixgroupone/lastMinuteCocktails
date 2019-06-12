@@ -55,35 +55,3 @@
 }
 
 
-@media (max-width: 620px) {
-  .searchCategories {
-    align-items: center;
-    justify-content: center;
-
-    label { 
-      padding-bottom: 3px;
-      margin: 0;
-      text-align: center;
-      
-    }
-
-    p {
-      text-align: center;
-    }
-  }
-
-  .categoriesContainer {
-    flex-direction: column;
-    width: 50%;
-    margin: 0;
-
-  }
-
-  .fas.fa-filter {
-    display: none;
-    
-  }
-
-}
-
-

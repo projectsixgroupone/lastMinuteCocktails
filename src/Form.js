@@ -10,13 +10,13 @@ class Form extends Component {
 
     }
   }
-
+  // handle the change in state
   onChange = (event) => {
     this.setState({
       value: event.target.value
     })
   }
-
+  // on submit call the api with handler passed as a prop from the parent
   onSubmit = (event) => {
     event.preventDefault()
     this.props.handlerFromParent(this.state.value)

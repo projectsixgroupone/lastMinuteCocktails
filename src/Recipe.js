@@ -13,12 +13,10 @@ export default class Recipe extends Component {
       allNotes: [],
       noteError: false,
       expand: false,
-      favourited: false,
-      userFavourited: false
     }
     this.myRef = React.createRef()
   }
-
+  // when the user clicks expand, set it in state and scroll to the box
   onExpand= (event) =>{
     this.setState({
       expand: true
@@ -30,6 +28,8 @@ export default class Recipe extends Component {
       })
     })
   }
+  
+  // when the user clicks shrink, set it in state and scroll to the box
   onShrink= (event) =>{
     this.setState({
       expand: false
@@ -41,22 +41,27 @@ export default class Recipe extends Component {
     })
   }
 
+  // handle change in note box
   onChange = (event) => {
     this.setState({
       note: event.target.value
     })
   }
+
+  // handle change in note name input
   onNameChange = (event) => {
     this.setState({
       noteName: event.target.value
     })
   }
 
+  // submit the note
   onSubmit = (event) => {
     event.preventDefault()
     this.setState({
       noteError: false
     })
+    // if note is valid call the add note function in the parent, otherwise show an error
     if(this.state.note !== '') {
       this.props.addNote(this.props.id, this.state.note, this.state.noteName)
     } else {
@@ -65,31 +70,41 @@ export default class Recipe extends Component {
       })
 
     }
-    // this.props.handlerFromParent(this.state.value)
   }
 
+  // when the user rates a drink push it into the array of ratings in state
   onRating = (event) => {
-    const ratings = this.state.totalRating;
+    const ratings = [...this.state.totalRating];
     ratings.push(parseInt(event.target.value))
 
     this.setState({
-      rating: event.target.value,
+      rating: parseInt(event.target.value),
       totalRating: ratings
 
     })
     this.props.addRating(this.props.id, ratings)
-    // console.log(ratings)
   }
 
+  // handle the rating input
+  handleRating = (event) => {
+    this.setState({
+      rating: parseInt(event.target.value),
+    })
+  }
 
+  
   componentDidMount() {
-
-    // const dbref = firebase.database().ref();
+    // when the component mounts default the note name input to the user name
+    if (this.props.displayName) {
+      this.setState({
+        noteName: this.props.displayName,
+      })
+    }
+    
+    // if the drink doesn't exist in firebase add it with favourite state of false
+    // if it does exist get the notes ratings, and favourite status and save it in state
     const dbref = firebase.database().ref('drinks/' + this.props.id);
-    const dbrefUser = firebase.database().ref('users/');
-
     dbref.on('value', (response) => {
-      // console.log(response.val() );
       if (response.val() === null) {
         dbref.update({
           favourite: false
@@ -101,8 +116,6 @@ export default class Recipe extends Component {
           for (let key in notes) {
             newNotes.push({note: notes[key].note, name: notes[key].name})
           }
-          // console.log(notes);
-          // console.log(newNotes);
           this.setState({
             allNotes: newNotes,
           })
@@ -131,8 +144,8 @@ export default class Recipe extends Component {
   }
 
 
-  // Takes each result from the search bar and displays the name, thumbnail and instructions relating to the drink
-  // Favourite button stores the drink based on the drink's property: id
+  
+  // Render shows either and expanded or minimized version of the recipe depending on state.
   render() {
 
     const expandContent = () =>{
@@ -144,11 +157,12 @@ export default class Recipe extends Component {
 
               <div className="ratingContainer">
                 <div className="rating">
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starFive' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 5}
+                    checked={this.state.averageRating === 5}
                     value="5"
                   />
                   <label
@@ -157,11 +171,12 @@ export default class Recipe extends Component {
                     title="Awesome"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starFour' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 4}
+                    checked={this.state.averageRating === 4}
                     value="4"
                   />
                   <label
@@ -170,11 +185,12 @@ export default class Recipe extends Component {
                     title="Great"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starThree' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 3}
+                    checked={this.state.averageRating === 3}
                     value="3"
                   />
                   <label
@@ -183,11 +199,12 @@ export default class Recipe extends Component {
                     title="Very good"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starTwo' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 2}
+                    checked={this.state.averageRating === 2}
                     value="2"
                   />
                   <label
@@ -196,11 +213,12 @@ export default class Recipe extends Component {
                     title="Good"
                     aria-hidden="true"
                   />
-                  <input onChange={this.onRating}
+                  <input onChange={this.handleRating}
+                    onClick={this.onRating}
                     type="radio"
                     id={'starOne' + this.props.id}
                     name={'rating' + this.props.id}
-                    checked={this.state.rating === 1}
+                    checked={this.state.averageRating === 1}
                     value="1"
                   />
                   <label
@@ -251,7 +269,8 @@ export default class Recipe extends Component {
                   })}
                 </div>
                 <form action="submit" onSubmit={this.onSubmit}>
-                  <input type="text" onChange={this.onNameChange} placeholder="Name"/>
+                  <input type="text" onChange={this.onNameChange} placeholder="Name"
+                  value={this.state.noteName} />
                   <textarea onChange={this.onChange} placeholder="Enter your note..." tabIndex="0" aria-label="Enter Your Note Here"/>
                   <div>{this.state.noteError ? <p className="noteError">Did you forget to add your comment?</p> :  null }</div>
                   <button className="addNote">Add Note</button>
@@ -273,11 +292,12 @@ export default class Recipe extends Component {
               <h2 aria-label={this.props.name}>{this.props.name}</h2>
 
                   <div className="rating">
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starFive' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 5}
+                      checked={this.state.averageRating === 5}
                       value="5"
                     />
                     <label
@@ -286,11 +306,12 @@ export default class Recipe extends Component {
                       title="Awesome"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starFour' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 4}
+                      checked={this.state.averageRating === 4}
                       value="4"
                     />
                     <label
@@ -299,11 +320,12 @@ export default class Recipe extends Component {
                       title="Great"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starThree' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 3}
+                      checked={this.state.averageRating === 3}
                       value="3"
                     />
                     <label
@@ -312,11 +334,12 @@ export default class Recipe extends Component {
                       title="Very good"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starTwo' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 2}
+                      checked={this.state.averageRating === 2}
                       value="2"
                     />
                     <label
@@ -325,11 +348,12 @@ export default class Recipe extends Component {
                       title="Good"
                       aria-hidden="true"
                     />
-                    <input onChange={this.onRating}
+                    <input onChange={this.handleRating}
+                    onClick={this.onRating}
                       type="radio"
                       id={'starOne' + this.props.id}
                       name={'rating' + this.props.id}
-                      checked={this.state.rating === 1}
+                      checked={this.state.averageRating === 1}
                       value="1"
                     />
                     <label
@@ -342,7 +366,6 @@ export default class Recipe extends Component {
 
               <p tabIndex="0">{this.props.instructions.length > 125 ? this.props.instructions.substring(0,122)+"..." : this.props.instructions }</p>
 
-                {/* {this.state.favourited ? <button className="favouriteButton unfavourite" onClick={() => this.props.unfavouriteDrink(this.props.id)}aria-label="Unfavorite This Drink"><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={() => this.props.favouriteDrink(this.props.id)} aria-label="Favorite This Drink"><i className="fas fa-heart"></i></button>} */}
                 {this.props.favourite ? <button className="favouriteButton unfavourite" onClick={()=> this.props.handleFavourites(this.props.id)}><i className="fas fa-heart"></i></button> : <button className="favouriteButton" onClick={()=> this.props.handleFavourites(this.props.id)}><i className="fas fa-heart"></i></button>}
               
               <button onClick={this.onExpand} className="readMore" aria-label="read more">

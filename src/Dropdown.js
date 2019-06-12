@@ -8,30 +8,25 @@ constructor(){
     }
 }
 
+// handle change on user input, filter drinks when the value changes
 handleChange = (e) => {
-    console.log(`handleChange`, e.target.value)
     this.setState({
         choice: e.target.value
     })
     this.props.getFilteredDrinks(e.target.value)
 }
 
-  // onChange = { this.handleChange }
-
   render() {
     return (
     
-        <form class="searchCategories">
+        <form className="searchCategories">
           <div className="categoriesContainer wrapper">
-     
-                <p><i class="fas fa-filter"></i>Filter By:</p>
-     
+                <p><i className="fas fa-filter"></i>Filter By:</p>
             <input onChange={this.handleChange}
               type="radio"
               id="all"
               name="filteredDrinkName"
               value="all"
-              // aria-hidden="true"
             />
             <label htmlFor="all">All</label>
 
@@ -40,7 +35,6 @@ handleChange = (e) => {
               id="alcoholic"
               name="filteredDrinkName"
               value="Alcoholic"
-              // aria-hidden="true"
             />
             <label htmlFor="alcoholic">Alcoholic</label>
 
@@ -49,7 +43,6 @@ handleChange = (e) => {
               id="Non alcoholic"
               name="filteredDrinkName"
               value="Non alcoholic"
-              // aria-hidden="true"
             />
             <label htmlFor="Non alcoholic">Non-Alcoholic</label>
           </div>
